@@ -3,6 +3,7 @@ import java.time.*;
 
 public class Task extends SchedulingObject {
 	
+	//data members
 	private int projectID = 0;
 	private String taskOwner = null;
 	private int previousTaskID = 0;
