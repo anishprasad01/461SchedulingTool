@@ -1,5 +1,6 @@
 
 import java.time.*;
+import java.util.Random;
 
 public class Task extends SchedulingObject {
 	
@@ -25,7 +26,9 @@ public class Task extends SchedulingObject {
 
 	@Override
 	protected int generateID() {
-		// TODO Auto-generated method stub
+		//task IDs are 5 to 6 digits
+		Random idGen = new Random();
+		int id = idGen.nextInt(990000) + 10000;
 		return 0;
 	}
 

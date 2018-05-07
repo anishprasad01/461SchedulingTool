@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class User extends SchedulingObject{
 	
@@ -69,8 +70,10 @@ public class User extends SchedulingObject{
 
 	@Override
 	protected int generateID() {
-		// TODO Auto-generated method stub
-		return 0;
+		//User IDs are 4 digits
+		Random idGen = new Random();
+		int id = idGen.nextInt(9000) + 1000;
+		return id;
 	}
 }
 

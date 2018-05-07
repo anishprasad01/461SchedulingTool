@@ -1,4 +1,3 @@
-
 public abstract class SchedulingObject {
 	
 	private int ID = 0;
