@@ -46,16 +46,13 @@ public class User extends SchedulingObject{
     	return false;
     }
 
-    public boolean removeProject(int projectID)
+    public boolean removeProject(Object projectID)
     {
-        int projectIndex = getProjectIndex(projectID);
-        
-        if(projectIndex == -1) {
-        	return false;
+        if(projectID instanceof Integer) {
+        	return this.projects.remove((Integer) projectID);
         }
         else {
-        	this.projects.remove(projectIndex);
-        	return true;
+        	return false;
         }
     }
     
@@ -68,6 +65,7 @@ public class User extends SchedulingObject{
     	return -1;
     }
 
+    //DOES NOT CHECK FOR DUPES
 	@Override
 	protected int generateID() {
 		//User IDs are 4 digits

@@ -5,7 +5,6 @@ import java.util.Random;
 public class Task extends SchedulingObject {
 	
 	//data members
-	private int projectID = 0;
 	private String taskOwner = null;
 	private int previousTaskID = 0;
 	private int nextTaskID = 0;
@@ -14,7 +13,15 @@ public class Task extends SchedulingObject {
 	private LocalDate endDate = null;
 	
 
-	public Task(String newName) {
+	public Task(String newName, String newOwner, LocalDate newStart, LocalDate newEnd, int newPrev, int newNext) {
+		super(newName);
+		taskOwner = newOwner;
+	    //check dates valid
+		//check projectIDs valid
+		//set
+	}
+	
+	public Task(String newName, String newOwner, LocalDate newStart, LocalDate newEnd, int newPrev) {
 		super(newName);
 		// TODO Auto-generated constructor stub
 	}
@@ -24,6 +31,55 @@ public class Task extends SchedulingObject {
 		// TODO Auto-generated constructor stub
 	}
 
+	public String getTaskOwner() {
+		return taskOwner;
+	}
+
+	public void setTaskOwner(String taskOwner) {
+		this.taskOwner = taskOwner;
+	}
+
+	public int getPreviousTaskID() {
+		return previousTaskID;
+	}
+
+	public void setPreviousTaskID(int previousTaskID) {
+		this.previousTaskID = previousTaskID;
+	}
+
+	public int getNextTaskID() {
+		return nextTaskID;
+	}
+
+	public void setNextTaskID(int nextTaskID) {
+		this.nextTaskID = nextTaskID;
+	}
+
+	public int getTaskDuration() {
+		return taskDuration;
+	}
+
+	public void setTaskDuration(int taskDuration) {
+		this.taskDuration = taskDuration;
+	}
+
+	public LocalDate getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
+
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
+	}
+
+	//DOES NOT CHECK FOR DUPES
 	@Override
 	protected int generateID() {
 		//task IDs are 5 to 6 digits
