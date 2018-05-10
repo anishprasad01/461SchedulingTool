@@ -5,7 +5,7 @@ import java.util.Random;
 public class Task extends SchedulingObject {
 	
 	//data members
-	private String taskOwner = null;
+	private String taskOwner = null; // The owner of the task
 	private int previousTaskID = 0;
 	private int nextTaskID = 0;
 	private int taskDuration = 0;
