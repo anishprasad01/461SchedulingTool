@@ -26,9 +26,20 @@ public class Task extends SchedulingObject {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Task(SchedulingObject toCopy) {
-		super(toCopy);
-		// TODO Auto-generated constructor stub
+	public Task(SchedulingObject object) {
+		super(object);
+		
+		Task toCopy = null;
+		
+		if(object instanceof Task) {
+			toCopy = (Task) object;
+		}
+		
+		this.setTaskOwner(toCopy.getTaskOwner());
+		this.setTaskDuration(toCopy.getTaskDuration());
+		this.setPreviousTaskID(toCopy.getPreviousTaskID());
+		this.setNextTaskID(toCopy.getNextTaskID());
+		
 	}
 
 	public String getTaskOwner() {
