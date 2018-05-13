@@ -17,13 +17,34 @@ public class Task extends SchedulingObject {
 		super(newName);
 		taskOwner = newOwner;
 	    //check dates valid
+		if (newEnd.after(newStart))
+		{
+			startDate = newStart;
+			endDate = newEnd;
+		}
 		//check projectIDs valid
+		if (newNext > newPrev)
+		{
+			previousTaskID = newPrev;
+			nextTaskID = newNext;
+		}
 		//set
 	}
 	
 	public Task(String newName, String newOwner, LocalDate newStart, LocalDate newEnd, int newPrev) {
 		super(newName);
-		// TODO Auto-generated constructor stub
+		taskOwner = newOwner;
+		//check dates valid
+		if (newEnd.after(newStart))
+		{
+			startDate = newStart;
+			endDate = newEnd;
+		}
+		//check projectIDs valid
+		if (nextTaskID > newPrev)
+		{
+			previousTaskID = newPrev;
+		}
 	}
 
 	public Task(SchedulingObject object) {
