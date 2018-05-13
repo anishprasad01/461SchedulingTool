@@ -6,7 +6,7 @@ public class Task extends SchedulingObject {
 	
 	//data members
 	private String taskOwner = null; // The owner of the task
-	private int previousTaskID = 0;
+	private int previousTaskID = 0; //the ID of the previous task
 	private int nextTaskID = 0;
 	private int taskDuration = 0;
 	private LocalDate startDate = null;
