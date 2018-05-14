@@ -17,7 +17,7 @@ public class Task extends SchedulingObject {
 		super(newName);
 		taskOwner = newOwner;
 	    //check dates valid
-		if (newEnd.after(newStart))
+		if (newEnd.isAfter(newStart))
 		{
 			startDate = newStart;
 			endDate = newEnd;
@@ -35,7 +35,7 @@ public class Task extends SchedulingObject {
 		super(newName);
 		taskOwner = newOwner;
 		//check dates valid
-		if (newEnd.after(newStart))
+		if (newEnd.isAfter(newStart))
 		{
 			startDate = newStart;
 			endDate = newEnd;
