@@ -60,7 +60,8 @@ public class Task extends SchedulingObject {
 		this.setTaskDuration(toCopy.getTaskDuration());
 		this.setPreviousTaskID(toCopy.getPreviousTaskID());
 		this.setNextTaskID(toCopy.getNextTaskID());
-		
+		this.setStartDate(toCopy.getStartDate());
+		this.setEndDate(toCopy.getEndDate());
 	}
 
 	public String getTaskOwner() {
