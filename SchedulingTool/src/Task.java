@@ -89,10 +89,15 @@ public class Task extends SchedulingObject {
 	}
 
 	public int getTaskDuration() {
-		return taskDuration;
+		int duration = generateDuration();
+		return duration;
 	}
-
-	public void setTaskDuration(int taskDuration) {
+	
+	private int generateDuration() {
+		
+	}
+	
+	private void setTaskDuration(int taskDuration) {
 		this.taskDuration = taskDuration;
 	}
 
@@ -125,7 +130,7 @@ public class Task extends SchedulingObject {
 	public String toString() 
 	{
 		return "Owner: " + taskOwner + ", Start date: " + startDate.toString() + ", End date: "
-	         + endDate.toString() + ", Duration: " + duration;
+	         + endDate.toString() + ", Duration: " + this.getTaskDuration();
 		 
 	}
 }
