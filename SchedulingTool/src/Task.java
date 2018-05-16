@@ -8,7 +8,7 @@ public class Task extends SchedulingObject {
 	private String taskOwner = null; // The owner of the task
 	private int previousTaskID = 0; //the ID of the previous task
 	private int nextTaskID = 0;
-	private int taskDuration = 0;
+	private long taskDuration = 0;
 	private LocalDate startDate = null;
 	private LocalDate endDate = null;
 	
@@ -88,16 +88,12 @@ public class Task extends SchedulingObject {
 		this.nextTaskID = nextTaskID;
 	}
 
-	public int getTaskDuration() {
-		int duration = generateDuration();
-		return duration;
+	public long getTaskDuration() {
+		long days = Duration.between(endDate.atStartOfDay(), startDate.atStartOfDay()).toDays();
+		return days;
 	}
 	
-	private int generateDuration() {
-		
-	}
-	
-	private void setTaskDuration(int taskDuration) {
+	private void setTaskDuration(long taskDuration) {
 		this.taskDuration = taskDuration;
 	}
 
