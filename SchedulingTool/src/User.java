@@ -35,7 +35,10 @@ public class User extends SchedulingObject{
     	}
     }
     
-    //public void printProjects
+    public void printProjects()
+	{
+
+	}
 
     public boolean addProject(int projectID)
     {

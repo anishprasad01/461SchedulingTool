@@ -121,4 +121,11 @@ public class Task extends SchedulingObject {
 		return id;
 	}
 
+	@Override
+	public String toString() 
+	{
+		return "Owner: " + taskOwner + ", Start date: " + startDate.toString() + ", End date: "
+	         + endDate.toString() + ", Duration: " + duration;
+		 
+	}
 }
