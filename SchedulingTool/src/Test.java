@@ -6,7 +6,16 @@ public class Test {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		Project testProject1 = new Project("TestProject1", "AP");
+		System.out.println(testProject1.toString());
+		
+	    Project testProject2 = new Project(null, null);
+		System.out.println(testProject2.toString());
+		
+		testProject2.setName("TestProject2");
+		System.out.println(testProject2.toString());
+		
 
 	}
 

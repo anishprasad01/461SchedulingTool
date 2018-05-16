@@ -4,9 +4,11 @@ import java.util.*;
 public class Project extends SchedulingObject {
 
 	private ArrayList<Task> taskList = new ArrayList<Task>();
+	private String managerName = "";
 
-	public Project(String newName) {
+	public Project(String newName, String name) {
 		super(newName);
+		managerName = name;
 	}
 
 	public boolean addTask(Task input) {
@@ -20,7 +22,22 @@ public class Project extends SchedulingObject {
 	}
 
 	public String getProjectName() {
-		return super.getName();
+		if(super.getName() != "") {
+			return super.getName();
+		}
+		else {
+			return "Project Unnamed";
+		}
+		
+	}
+	
+	public String getManagerName() {
+		if(this.managerName != "") {
+			return this.managerName;
+		}
+		else {
+			return "No PM Associated with Project";
+		}
 	}
 
 	public void setProjectName(String input) {
@@ -51,6 +68,10 @@ public class Project extends SchedulingObject {
 			System.console().writer()
 					.print("Task " + i + ": " + taskList.get(i).getName() + " ID: " + taskList.get(i).getID());
 		}
+	}
+	
+	public String toString() {
+		return "ID: " + this.getID() + " Name: " + this.getProjectName() + " PM: " + this.getManagerName();
 	}
 
 	@Override

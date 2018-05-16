@@ -1,7 +1,7 @@
 public abstract class SchedulingObject {
 	
 	private int ID = 0;
-	private String name = null;
+	private String name = "";
 
 	public SchedulingObject(String newName){
 		name = newName;
