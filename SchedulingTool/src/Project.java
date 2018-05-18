@@ -4,6 +4,7 @@ import java.util.*;
 public class Project extends SchedulingObject {
 
 	private ArrayList<Task> taskList = new ArrayList<Task>();
+	private ArrayList<Task> draftList = new ArrayList<Task>();
 	private String managerName = "";
 
 	public Project(String newName, String name) {
