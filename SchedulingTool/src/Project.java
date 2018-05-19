@@ -70,6 +70,17 @@ public class Project extends SchedulingObject {
 					.print("Task " + i + ": " + taskList.get(i).getName() + " ID: " + taskList.get(i).getID());
 		}
 	}
+
+	// TODO: Discuss the format for the data in the file
+	public void writeToFile()
+	{
+
+	}
+
+	public void readToFile()
+	{
+
+	}
 	
 	public String toString() {
 		return "ID: " + this.getID() + " Name: " + this.getProjectName() + " PM: " + this.getManagerName();
