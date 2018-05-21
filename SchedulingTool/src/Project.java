@@ -71,15 +71,9 @@ public class Project extends SchedulingObject {
 		}
 	}
 
-	// TODO: Discuss the format for the data in the file
-	public void writeToFile()
-	{
-
-	}
-
-	public void readToFile()
-	{
-
+	public String toFile() {
+		//returns string to store in file
+		return "";
 	}
 	
 	public String toString() {
