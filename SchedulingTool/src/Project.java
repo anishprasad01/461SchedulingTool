@@ -20,16 +20,6 @@ public class Project extends SchedulingObject {
 			return false;
 		}
 	}
-
-	public String getProjectName() {
-		if(super.getName() != "") {
-			return super.getName();
-		}
-		else {
-			return "Project Unnamed";
-		}
-		
-	}
 	
 	public String getManagerName() {
 		if(this.managerName != "") {
@@ -37,12 +27,6 @@ public class Project extends SchedulingObject {
 		}
 		else {
 			return "No PM Associated with Project";
-		}
-	}
-
-	public void setProjectName(String input) {
-		if (input instanceof String) {
-			super.setName(input);
 		}
 	}
 
@@ -72,13 +56,13 @@ public class Project extends SchedulingObject {
 
 	@Override
 	public String toFile() {
-		//returns string to store in file
-		return "";
+		String retVal = "#" + this.getID() + "," + this.getName() + "," + this.getManagerName() + "##";
+		return retVal;
 	}
 	
 	@Override
 	public String toString() {
-		return "ID: " + this.getID() + " Name: " + this.getProjectName() + " PM: " + this.getManagerName();
+		return "ID: " + this.getID() + " Name: " + this.getName() + " PM: " + this.getManagerName();
 	}
 
 	@Override
