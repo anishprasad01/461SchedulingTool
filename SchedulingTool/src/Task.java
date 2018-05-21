@@ -9,11 +9,12 @@ public class Task extends SchedulingObject {
 	private int previousTaskID = 0; //the ID of the previous task
 	private int nextTaskID = 0;
 	private long taskDuration = 0;
+	private int parentProjectID = 0;
 	private LocalDate startDate = null;
 	private LocalDate endDate = null;
 	
 
-	public Task(String newName, String newOwner, LocalDate newStart, LocalDate newEnd, int newPrev, int newNext) {
+	public Task(String newName, String newOwner, LocalDate newStart, LocalDate newEnd, int parentID, int newPrev, int newNext) {
 		super(newName);
 		taskOwner = newOwner;
 	    //check dates valid
@@ -29,9 +30,11 @@ public class Task extends SchedulingObject {
 			nextTaskID = newNext;
 		}
 		//set
+		
+		this.setParentProjectID(parentID);
 	}
 	
-	public Task(String newName, String newOwner, LocalDate newStart, LocalDate newEnd, int newPrev) {
+	public Task(String newName, String newOwner, LocalDate newStart, LocalDate newEnd, int parentID, int newPrev) {
 		super(newName);
 		taskOwner = newOwner;
 		//check dates valid
@@ -45,6 +48,21 @@ public class Task extends SchedulingObject {
 		{
 			previousTaskID = newPrev;
 		}
+		
+		this.setParentProjectID(parentID);
+	}
+	
+	public Task(String newName, String newOwner, LocalDate newStart, LocalDate newEnd, int parentID) {
+		super(newName);
+		taskOwner = newOwner;
+		//check dates valid
+		if (newEnd.isAfter(newStart))
+		{
+			startDate = newStart;
+			endDate = newEnd;
+		}
+		
+		this.setParentProjectID(parentID);
 	}
 
 	public Task(SchedulingObject object) {
@@ -62,6 +80,7 @@ public class Task extends SchedulingObject {
 		this.setNextTaskID(toCopy.getNextTaskID());
 		this.setStartDate(toCopy.getStartDate());
 		this.setEndDate(toCopy.getEndDate());
+		this.setParentProjectID(toCopy.getParentProjectID());
 	}
 
 	public String getTaskOwner() {
@@ -70,6 +89,14 @@ public class Task extends SchedulingObject {
 
 	public void setTaskOwner(String taskOwner) {
 		this.taskOwner = taskOwner;
+	}
+	
+	public int getParentProjectID() {
+		return parentProjectID;
+	}
+	
+	public void setParentProjectID(int newParentID) {
+		parentProjectID = newParentID;
 	}
 
 	public int getPreviousTaskID() {
