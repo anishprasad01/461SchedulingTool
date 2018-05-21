@@ -114,14 +114,17 @@ public class Task extends SchedulingObject {
 	public void setNextTaskID(int nextTaskID) {
 		this.nextTaskID = nextTaskID;
 	}
+	
+	public void calculateDuration() {
+		taskDuration = Duration.between(endDate.atStartOfDay(), startDate.atStartOfDay()).toDays();
+	}
 
 	public long getTaskDuration() {
-		long days = Duration.between(endDate.atStartOfDay(), startDate.atStartOfDay()).toDays();
-		return days;
+		return taskDuration;
 	}
 	
-	private void setTaskDuration(long taskDuration) {
-		this.taskDuration = taskDuration;
+	private void setTaskDuration(long newTaskDuration) {
+		this.taskDuration = newTaskDuration;
 	}
 
 	public LocalDate getStartDate() {
