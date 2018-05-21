@@ -4,18 +4,23 @@ import java.io.*;
 
 public class Application {
 	
-	private String currentUser;
+	private String username;
+	private User currentUser;
 	private HashMap<String, User> users = new HashMap<String, User>(); //stores user objects, access by string
 	private HashMap<Project, Integer> data = new HashMap<Project, Integer>(); // stores projects by ID
 	
 
-	public Application(String username) {
-		
+	public Application(String inputUsername) {
+		this.username = inputUsername;
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	private boolean getUserFromMap() {
+		return false;
 	}
 	
 	public void saveToFile() {

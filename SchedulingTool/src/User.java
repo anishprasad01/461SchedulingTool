@@ -76,5 +76,11 @@ public class User extends SchedulingObject{
 		int id = idGen.nextInt(9000) + 1000;
 		return id;
 	}
+
+	@Override
+	public String toFile() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
