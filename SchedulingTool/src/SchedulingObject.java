@@ -1,3 +1,5 @@
+// I added a comment for coding
+
 public abstract class SchedulingObject {
 	
 	private int ID = 0;
