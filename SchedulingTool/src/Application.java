@@ -20,7 +20,13 @@ public class Application {
 	}
 	
 	private boolean getUserFromMap() {
-		return false;
+		currentUser = this.users.get(username);
+		if(currentUser != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	public void saveToFile() {
