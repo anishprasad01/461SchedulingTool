@@ -6,8 +6,8 @@ public class Project extends SchedulingObject {
 	private ArrayList<Task> taskList = new ArrayList<Task>();
 	private String managerName = "";
 
-	public Project(String newName, String name) {
-		super(newName);
+	public Project(String taskName, String name) {
+		super(taskName);
 		managerName = name;
 	}
 
