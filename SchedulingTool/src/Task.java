@@ -209,7 +209,7 @@ public class Task extends SchedulingObject {
 	@Override
 	public String toString() 
 	{
-		return "Owner: " + taskOwner + ", Start date: " + startDate.toString() + ", End date: "
+		return "Task: " + this.getName() +" Owner: " + taskOwner + ", Start date: " + startDate.toString() + ", End date: "
 	         + endDate.toString() + ", Duration: " + this.getTaskDuration();
 		 
 	}

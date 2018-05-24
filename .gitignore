@@ -21,3 +21,6 @@
 .recommenders/index/http___download_eclipse_org_recommenders_models_mars_/_0.nrm
 .recommenders/index/http___download_eclipse_org_recommenders_models_mars_/_0.prx
 .recommenders/index/http___download_eclipse_org_recommenders_models_mars_/_0.tis
+SchedulingTool/bin/Project.class
+*.class
+SchedulingTool/bin/Project.class
