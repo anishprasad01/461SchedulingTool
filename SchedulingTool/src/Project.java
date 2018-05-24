@@ -117,7 +117,7 @@ public class Project extends SchedulingObject {
 	//A method that returns the index of a task whose name is specified as input
 	//so that it can be obtained from the task list using that index.
 	//it is a helper for findTaskByName() and it returns -1 if fails.
-	public int getTaskIndexByName(String input) {
+	private int getTaskIndexByName(String input) {
 		for (int i = 0; i < taskList.size(); i++) {
 			if (taskList.get(i).getName() == input) {
 
@@ -168,5 +168,18 @@ public class Project extends SchedulingObject {
 		}
 	}
 
+	//A method that returns a task whose name is specified as input
+	public Task FindTaskByName(String input){
+
+		//return task using the getTaskIndexByName method.
+		if(getTaskIndexByName(input) != -1){
+			return taskList.get(getTaskIndexByName(input));
+		}
+		else{
+			//return null;
+			return null;
+		}
+
+	}
 
 }
