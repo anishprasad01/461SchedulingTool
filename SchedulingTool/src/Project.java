@@ -20,10 +20,9 @@ public class Project extends SchedulingObject {
 		}
 	}
 
-	public ArrayList<Task> getTaskList()
-    {
+	public ArrayList<Task> getTaskList() {
 		return taskList;
-
+	}
 	public String getProjectName() {
 		if (super.getName() != "") {
 			return super.getName();

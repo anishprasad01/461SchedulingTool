@@ -121,21 +121,14 @@ public class Application {
         }
 	}
 	
-	private static void createFile()
-	{
-		if (this.file.createNewFile())
-		{
+	private static void createFile() {
+		if (this.file.createNewFile()) {
 			System.out.println("File is created!");
-		}
-		else
-		{
+		} else {
 			System.out.println("File already exists.");
 		}
-	
-	private static void createFile() {
-
 	}
-	
+
 	public static void restoreFromFile() {
 		
 	}
