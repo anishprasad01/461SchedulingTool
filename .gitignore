@@ -2,6 +2,7 @@
 *.lock
 *.index
 *.prefs
+*.class
 .metadata/.plugins/org.eclipse.epp.logging.aeri.ide/org.eclipse.epp.logging.aeri.ide.server/remote-history/_1.frq
 .metadata/.plugins/org.eclipse.epp.logging.aeri.ide/org.eclipse.epp.logging.aeri.ide.server/local-history/_0.fdt
 .metadata/.plugins/org.eclipse.epp.logging.aeri.ide/org.eclipse.epp.logging.aeri.ide.server/local-history/_0.tis
@@ -20,3 +21,6 @@
 .recommenders/index/http___download_eclipse_org_recommenders_models_mars_/_0.nrm
 .recommenders/index/http___download_eclipse_org_recommenders_models_mars_/_0.prx
 .recommenders/index/http___download_eclipse_org_recommenders_models_mars_/_0.tis
+SchedulingTool/bin/Project.class
+*.class
+SchedulingTool/bin/Project.class
