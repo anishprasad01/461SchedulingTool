@@ -3,9 +3,9 @@ import java.util.Scanner;
 import java.io.*;
 
 public class Application {
-	private File file;
-	private String username;
-	private User currentUser;
+	private static File file;
+	private static String username;
+	private static User currentUser;
 	private static HashMap<String, User> users = new HashMap<String, User>(); //stores user objects, access by string
 	private static HashMap<String, Project> projects = new HashMap<String, Project>(); // stores project, access by string
 
@@ -14,7 +14,7 @@ public class Application {
 	}
 
 	public static void main(String[] args) {
-        this.file = new File("projectData.csv");
+        file = new File("projectData.csv");
 		Scanner input = new Scanner(System.in);
 		System.out.println("Welcome to The Nameless Scheduler!");
 		System.out.println("Here are your options:");
@@ -110,7 +110,7 @@ public class Application {
         }
 
         // Iterate over the Projects
-        for (Project project : data.values())
+        for (Project project : projects.values())
         {
             writer.write(project.toFile() + "\n");
             // Iterate over the Tasks in the list for that Project
@@ -122,7 +122,7 @@ public class Application {
 	}
 	
 	private static void createFile() {
-		if (this.file.createNewFile()) {
+		if (file.createNewFile()) {
 			System.out.println("File is created!");
 		} else {
 			System.out.println("File already exists.");
