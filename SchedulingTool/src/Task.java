@@ -12,7 +12,13 @@ public class Task extends SchedulingObject {
 	private int parentProjectID = 0;
 	private LocalDate startDate = null;
 	private LocalDate endDate = null;
-	
+
+	//Variables that are used for Critical path Calculations
+
+	private long earlyStart;
+    private long earlyFinish;
+    private long lateStart;
+    private long lateFinish;
 
 	public Task(String newName, String newOwner, LocalDate newStart, LocalDate newEnd, int parentID, int newPrev, int newNext) {
 		super(newName);
@@ -141,6 +147,42 @@ public class Task extends SchedulingObject {
 
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
+	}
+
+
+	//Accessors and Mutators for the critical path variables
+
+	public long getEarlyStart(){
+		return earlyStart;
+	}
+
+	public void setEarlyStart(long input){
+		earlyStart = input;
+	}
+
+	public long getLateStart(){
+
+		return lateStart;
+	}
+
+	public void setLateStart(long input){
+		lateStart = input;
+	}
+
+	public long getEarlyFinish(){
+		return earlyFinish;
+	}
+
+	public void setEarlyFinish(long input){
+		earlyFinish = input;
+	}
+
+	public long getLateFinish(){
+		return lateFinish;
+	}
+
+	public void setLateFinish(long input){
+		lateFinish = input;
 	}
 
 	//DOES NOT CHECK FOR DUPES
