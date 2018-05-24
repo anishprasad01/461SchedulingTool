@@ -193,6 +193,18 @@ public class Task extends SchedulingObject {
 		int id = idGen.nextInt(990000) + 10000;
 		return id;
 	}
+	
+	//#ID,NAME,OWNER,DURATION,PROJECTID,PREVID,NEXTID,STARTDATE,ENDDATE##
+	
+	@Override
+	public String toFile() {
+		this.calculateDuration();
+		String retVal = "#" + this.getID() + "," + this.getName() + "," + this.getTaskOwner() + "," + 
+				this.getTaskDuration() + "," + this.getParentProjectID() + "," + this.getPreviousTaskID()
+				 + "," + this.getNextTaskID() + "," + this.getStartDate().toString()
+				 + "," + this.getEndDate().toString() + "##";
+		return retVal;
+	}
 
 	@Override
 	public String toString() 

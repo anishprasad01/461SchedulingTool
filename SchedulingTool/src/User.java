@@ -11,14 +11,6 @@ public class User extends SchedulingObject{
         super(username);
     }
     
-    public String getUserName() {
-    	return super.getName();
-    }
-    
-    public int getUserID() {
-    	return super.getID();
-    }
-    
     public boolean userInProject(Object projectID) {
     	if(projectID instanceof Integer) {
     		Integer project = (Integer) projectID;
@@ -37,7 +29,7 @@ public class User extends SchedulingObject{
     
     public void printProjects()
 	{
-
+    	
 	}
 
     public boolean addProject(int projectID)
@@ -75,6 +67,18 @@ public class User extends SchedulingObject{
 		Random idGen = new Random();
 		int id = idGen.nextInt(9000) + 1000;
 		return id;
+	}
+	
+	@Override
+	public String toFile() {
+		String retVal = "#" + this.getID() + "," + this.getName() + "##"; 
+		return retVal;
+	}
+	
+	@Override
+	public String toString() {
+		String retVal = "ID: " + this.getID() + " Name: " + this.getName(); 
+		return retVal;
 	}
 }
 

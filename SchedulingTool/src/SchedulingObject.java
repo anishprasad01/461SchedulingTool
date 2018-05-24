@@ -29,6 +29,8 @@ public abstract class SchedulingObject {
 	
 	protected abstract int generateID();
 	
+	public abstract String toFile();
+	
 	public String toString() {
 		String retVal = "ID: " + this.getID() + " Name: " + this.getName() + " ";
 		return retVal;
