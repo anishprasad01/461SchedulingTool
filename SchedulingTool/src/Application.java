@@ -95,9 +95,7 @@ public class Application {
 //			return false;
 //		}
 //	}
-	
-<<<<<<< HEAD
-	public void saveToFile()
+	public static void saveToFile()
     {
 		if (!file.exists())
         {
@@ -123,7 +121,7 @@ public class Application {
         }
 	}
 	
-	private void createFile()
+	private static void createFile()
 	{
 		if (this.file.createNewFile())
 		{
@@ -133,14 +131,9 @@ public class Application {
 		{
 			System.out.println("File already exists.");
 		}
-=======
-	public static void saveToFile() {
-		
-	}
 	
 	private static void createFile() {
-		
->>>>>>> 0c4f587f1c9086af72066940cab4cdcdb77d8b80
+
 	}
 	
 	public static void restoreFromFile() {
