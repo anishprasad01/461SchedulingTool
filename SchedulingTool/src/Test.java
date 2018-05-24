@@ -19,7 +19,6 @@ public class Test {
 		System.out.println(testProject2.toString());
 
 		//Test that setup early start, early finish, etc
-		testProject2.setupCP(0,0);
 
 
         //remove the 2 to search for task correctly, add the 2 to see what the code does when task is not found
@@ -28,7 +27,9 @@ public class Test {
         	System.out.println("Could not find specified task");
 		}
 		else{
-        	System.out.println("Found task and it will be on: " + tempTask.getStartDate());
+        	tempTask.setTaskDuration(5);
+			testProject2.setupCP(1,3);
+			System.out.println("Found task and it will be on: " + tempTask.getStartDate());
         	System.out.println("It has early Start: " + tempTask.getEarlyStart());
         	System.out.println("It has late Start: " + tempTask.getLateStart());
         	System.out.println("Its Duration: " + tempTask.getTaskDuration());

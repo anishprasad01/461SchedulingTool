@@ -129,7 +129,7 @@ public class Task extends SchedulingObject {
 		return taskDuration;
 	}
 	
-	private void setTaskDuration(long newTaskDuration) {
+	public void setTaskDuration(long newTaskDuration) {
 		this.taskDuration = newTaskDuration;
 	}
 

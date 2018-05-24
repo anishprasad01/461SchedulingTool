@@ -95,8 +95,8 @@ public class Project extends SchedulingObject {
 
 				taskList.get(i).setEarlyStart(earlyStartOfFirstActivity);
 				taskList.get(i).setLateStart(lateStartOfFirstActivity);
-				taskList.get(i).setEarlyFinish(taskList.get(i).getEarlyStart() + taskList.get(i).getTaskDuration());
-				taskList.get(i).setLateFinish(taskList.get(i).getLateFinish() + taskList.get(i).getTaskDuration());
+				taskList.get(i).setEarlyFinish(taskList.get(i).getEarlyStart() -1 + taskList.get(i).getTaskDuration());
+				taskList.get(i).setLateFinish(taskList.get(i).getLateStart() -1 + taskList.get(i).getTaskDuration());
 			} else {
 
 				//set early start and late start early finish and late finish of the previous task
@@ -104,8 +104,8 @@ public class Project extends SchedulingObject {
 
 				taskList.get(i).setEarlyStart(taskList.get(i - 1).getEarlyFinish());
 				taskList.get(i).setLateStart(taskList.get(i - 1).getLateFinish());
-				taskList.get(i).setEarlyFinish(taskList.get(i).getEarlyStart() + taskList.get(i).getTaskDuration());
-				taskList.get(i).setLateFinish(taskList.get(i).getLateFinish() + taskList.get(i).getTaskDuration());
+				taskList.get(i).setEarlyFinish(taskList.get(i).getEarlyStart() -1 + taskList.get(i).getTaskDuration());
+				taskList.get(i).setLateFinish(taskList.get(i).getLateStart() -1 + taskList.get(i).getTaskDuration());
 
 
 			}
