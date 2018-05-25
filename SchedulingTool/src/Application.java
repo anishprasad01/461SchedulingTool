@@ -129,8 +129,32 @@ public class Application {
 		}
 	}
 
-	public static void restoreFromFile() {
-		
+	public static void restoreFromFile()
+	{
+	    Scanner scanner = new Scanner(file);
+	    while (scanner.hasNextLine())
+        {
+            String line = scanner.nextLine();
+            line = line.replaceAll("#", "");
+            String array[] = line.split("\\s");
+            if (array.length == 2)
+            {
+                // The User constructor does not take an ID. How will we restore the ID?
+            }
+            else if (array.length == 3)
+            {
+                // Same issue with ID for Project
+            }
+            else if (array.length == 9)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
 	}
 	
 	private static boolean saveStateToFile() {
