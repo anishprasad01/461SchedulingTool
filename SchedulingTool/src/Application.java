@@ -95,7 +95,7 @@ public class Application {
 //			return false;
 //		}
 //	}
-	public static void saveToFile()
+	public static void saveToFile() throws IOException
     {
 		if (!file.exists())
         {
@@ -121,7 +121,7 @@ public class Application {
         }
 	}
 	
-	private static void createFile() {
+	private static void createFile() throws IOException {
 		if (file.createNewFile()) {
 			System.out.println("File is created!");
 		} else {
@@ -129,7 +129,7 @@ public class Application {
 		}
 	}
 
-	public static void restoreFromFile()
+	public static void restoreFromFile() throws FileNotFoundException
 	{
 	    Scanner scanner = new Scanner(file);
 	    while (scanner.hasNextLine())
