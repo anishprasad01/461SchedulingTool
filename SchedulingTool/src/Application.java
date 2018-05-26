@@ -39,7 +39,7 @@ public class Application {
 				break;
 			
 			case 4:
-				//listAllProjects();
+				listAllProjects();
 				break;
 				
 			case 5:
@@ -178,7 +178,6 @@ public class Application {
 			Project toAdd = new Project(projectName, managerName);
 			projects.put(projectName, toAdd);
 		}
-		
 	}
 	
 	public static void createTask() {
@@ -213,7 +212,7 @@ public class Application {
 		}
 	}
 	
-	
-	
-
+	public static void listAllProjects() {
+		System.out.println(projects.toString());
+	}
 }
