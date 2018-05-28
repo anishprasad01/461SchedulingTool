@@ -57,7 +57,7 @@ public class Test {
 
 		}
 
-		//testProject2.printAllTaskNames();
+		testProject2.printAllTaskNames();
 
 		System.out.println(testProject2.getManagerName());
 		System.out.println(testProject2.getProjectName());

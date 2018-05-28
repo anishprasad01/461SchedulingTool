@@ -59,10 +59,7 @@ public class Project extends SchedulingObject {
 
 
 
-	/*public void addTaskByName(String input) {
-		Task newTask = new Task(input);
-		this.taskList.add(newTask);
-	}*/
+
 
 	public void removeTask(Task input) {
 		this.taskList.remove(input);
@@ -77,9 +74,10 @@ public class Project extends SchedulingObject {
 	}
 
 	public void printAllTaskNames() {
-		for (int i = 0; i < taskList.size(); i++) {
-			System.console().writer()
-					.print("Task " + i + ": " + taskList.get(i).getName() + " ID: " + taskList.get(i).getID());
+
+		for (int i = 0; i < this.taskList.size(); i++) {
+		
+		    System.out.println("Task " + i + ": " + taskList.get(i).getName() + " ID: " + taskList.get(i).getID());
 		}
 	}
 
