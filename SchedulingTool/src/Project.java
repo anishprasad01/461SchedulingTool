@@ -13,8 +13,20 @@ public class Project extends SchedulingObject {
 
 	public boolean addTask(Task input) {
 		if (input.getClass() == Task.class) {
-			this.taskList.add(input);
-			return true;
+
+		for(int i = 0; i < taskList.size();i++){
+			if(taskList.get(i).getName() == input.getName()){
+
+				System.out.println("Task is already added, ignoring command");
+				return  false;
+			}
+
+
+		}
+		taskList.add(input);
+
+		return true;
+
 		} else {
 			return false;
 		}
