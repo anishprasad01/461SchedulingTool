@@ -51,9 +51,9 @@ public class Project extends SchedulingObject {
 		}
 	}
 
-	public void setManagerName(String Input){
+	public void setManagerName(String input){
 
-	this.managerName = Input;
+	this.managerName = input;
 
 	}
 
@@ -189,7 +189,7 @@ public class Project extends SchedulingObject {
 	}
 
 	//A method that returns a task whose name is specified as input
-	public Task FindTaskByName(String input){
+	public Task findTaskByName(String input){
 
 		//return task using the getTaskIndexByName method.
 		if(getTaskIndexByName(input) != -1){
