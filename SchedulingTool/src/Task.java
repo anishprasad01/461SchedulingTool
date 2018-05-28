@@ -39,7 +39,58 @@ public class Task extends SchedulingObject {
 		
 		this.setParentProjectID(parentID);
 	}
-	
+
+	// This constructor also takes an id
+    public Task(int id, String newName, String newOwner, LocalDate newStart, LocalDate newEnd, int parentID,
+                int newPrev, int newNext)
+    {
+        super(newName, id);
+        taskOwner = newOwner;
+        //check dates valid
+        if (newEnd.isAfter(newStart))
+        {
+            startDate = newStart;
+            endDate = newEnd;
+        }
+        //check projectIDs valid
+        if (newNext > newPrev)
+        {
+            previousTaskID = newPrev;
+            nextTaskID = newNext;
+        }
+        //set
+
+        this.setParentProjectID(parentID);
+    }
+
+    // This constructor also takes an id
+    public Task(int id, String newName, String newOwner, LocalDate newStart, LocalDate newEnd, int parentID,
+                int newPrev, int newNext, long earlyStart, long lateStart)
+    {
+        super(newName, id);
+        taskOwner = newOwner;
+        //check dates valid
+        if (newEnd.isAfter(newStart))
+        {
+            startDate = newStart;
+            endDate = newEnd;
+        }
+        //check projectIDs valid
+        if (newNext > newPrev)
+        {
+            previousTaskID = newPrev;
+            nextTaskID = newNext;
+        }
+
+        if (earlyStart <= lateStart)
+        {
+            this.earlyStart = earlyStart;
+            this.lateStart = lateStart;
+        }
+        //set
+
+        this.setParentProjectID(parentID);
+    }
 	public Task(String newName, String newOwner, LocalDate newStart, LocalDate newEnd, int parentID, int newPrev) {
 		super(newName);
 		taskOwner = newOwner;
