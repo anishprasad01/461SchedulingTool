@@ -122,7 +122,9 @@ public class Task extends SchedulingObject {
 	}
 	
 	public void calculateDuration() {
-		taskDuration = Duration.between(endDate.atStartOfDay(), startDate.atStartOfDay()).toDays();
+
+
+        taskDuration = Period.between(startDate,endDate).getDays();
 	}
 
 	public long getTaskDuration() {
