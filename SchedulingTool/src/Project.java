@@ -23,7 +23,7 @@ public class Project extends SchedulingObject {
 
 
 		}
-		taskList.add(input);
+		this.taskList.add(input);
 
 		return true;
 
@@ -50,6 +50,14 @@ public class Project extends SchedulingObject {
 			return "No PM Associated with Project";
 		}
 	}
+
+	public void setManagerName(String Input){
+
+	this.managerName = Input;
+
+	}
+
+
 
 	/*public void addTaskByName(String input) {
 		Task newTask = new Task(input);
