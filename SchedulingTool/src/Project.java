@@ -12,7 +12,7 @@ public class Project extends SchedulingObject {
 	}
 
 	public boolean addTask(Task input) {
-		if (input.getClass() == Task.class) {
+		if (input.getClass() == Task.class && input.getName() != "") {
 
 		for(int i = 0; i < taskList.size();i++){
 			if(taskList.get(i).getName() == input.getName()){
