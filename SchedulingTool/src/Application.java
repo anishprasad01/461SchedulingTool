@@ -168,7 +168,7 @@ public class Application {
             if (array.length == 2)
             {
                 String name = array[1];
-            	User user = new User(array[1], array[0]);
+            	User user = new User(array[1], Integer.parseInt(array[0]));
                 users.put(name, user);
             }
             else if (array.length == 3)
@@ -177,7 +177,7 @@ public class Application {
                 // Project name is index 1
                 String name = array[1];
                 // Project name, manager name, id
-                Project project = new Project(name, array[2], array[0]);
+                Project project = new Project(name, array[2], Integer.parseInt(array[0]));
                 projects.put(name, project);
             }
             else if (array.length == 9)
