@@ -88,7 +88,7 @@ public class Application {
 				System.out.println("No users found in system");
 				System.out.println("Starting user creation wizard");
 				createUser();
-				System.out.println("HHERE");
+				System.out.println("Logged in as new User");
 			}
 			User temp = users.get(username);
 			if(temp.equals(null) && count != 0) {
