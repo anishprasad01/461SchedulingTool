@@ -35,6 +35,17 @@ public class Project extends SchedulingObject {
 	public ArrayList<Task> getTaskList() {
 		return taskList;
 	}
+	
+	public Task getTaskByName(String target) {
+		for(int i = 0; i < this.taskList.size(); i++) {
+			if(this.taskList.get(i).getName().equals(target)) {
+				return this.taskList.get(i);
+			}
+		}
+		return null; //if not found, return null
+	}
+	
+	
 	public String getProjectName() {
 		if (super.getName() != "") {
 			return super.getName();
