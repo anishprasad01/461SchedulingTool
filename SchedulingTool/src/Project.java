@@ -6,11 +6,17 @@ public class Project extends SchedulingObject {
 	private ArrayList<Task> taskList = new ArrayList<Task>();
 	private String managerName = "";
 
-	public Project(String taskName, String name) {
+	public Project(String taskName, String name)
+	{
 		super(taskName);
 		managerName = name;
 	}
 
+	public Project(String taskName, String name, int id)
+	{
+		super(taskName, id);
+		managerName = name;
+	}
 	public boolean addTask(Task input) {
 		if (input.getClass() == Task.class && input.getName() != "") {
 
@@ -87,7 +93,7 @@ public class Project extends SchedulingObject {
 	public void printAllTaskNames() {
 
 		for (int i = 0; i < this.taskList.size(); i++) {
-		
+
 		    System.out.println("Task " + i + ": " + taskList.get(i).getName() + " ID: " + taskList.get(i).getID());
 		}
 	}

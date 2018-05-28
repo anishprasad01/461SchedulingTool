@@ -9,6 +9,12 @@ public abstract class SchedulingObject {
 		name = newName;
 		ID = generateID();
 	}
+
+	public SchedulingObject(String newName, int newID)
+	{
+		name = newName;
+		ID = newID;
+	}
 	
 	public SchedulingObject(SchedulingObject toCopy) {
 		this.ID = toCopy.ID;
