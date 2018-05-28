@@ -76,7 +76,7 @@ public class Project extends SchedulingObject {
 	public void printAllTaskNames() {
 
 		for (int i = 0; i < this.taskList.size(); i++) {
-		
+
 		    System.out.println("Task " + i + ": " + taskList.get(i).getName() + " ID: " + taskList.get(i).getID());
 		}
 	}
