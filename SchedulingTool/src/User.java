@@ -10,6 +10,11 @@ public class User extends SchedulingObject{
     	//ID generated in superclass constructor
         super(username);
     }
+
+    public User(String username, int id)
+	{
+		super(username, id);
+	}
     
     public boolean userInProject(Object projectID) {
     	if(projectID instanceof Integer) {
