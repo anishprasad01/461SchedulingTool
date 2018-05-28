@@ -4,7 +4,7 @@ import java.io.*;
 
 public class Application {
 	private static File file;
-	private static String username;
+	//private static String username;
 	private static User currentUser;
 	private static HashMap<String, User> users = new HashMap<String, User>(); //stores user objects, access by string
 	private static HashMap<String, Project> projects = new HashMap<String, Project>(); // stores project, access by string
@@ -17,6 +17,9 @@ public class Application {
         file = new File("projectData.csv");
 		Scanner input = new Scanner(System.in);
 		System.out.println("Welcome to The Nameless Scheduler!");
+		
+		login();
+		
 		System.out.println("Here are your options:");
 		
 		boolean quit = false;
@@ -60,6 +63,30 @@ public class Application {
 			}
 		}
 		
+	}
+	
+	
+	private static void login() {
+		Scanner input = new Scanner(System.in);
+		int count = 5;
+		while(true) {
+			System.out.println("Enter your username.");
+			String username = input.nextLine();
+			User temp = users.get(username);
+			if(temp.equals(null) && count != 0) {
+				System.out.println("That user does not exist. Try again");
+				System.out.println("You have " + count + " tries remaining");
+				count--;
+			}
+			else if(temp.equals(null) && count == 0) {
+				System.out.println("Tries exceeded, exiting program.");
+				System.exit(0);
+			}
+			else {
+				currentUser = temp;
+				break;
+			}
+		}
 	}
 	
 	private static int getUserFunctionChoice(Scanner input) {

@@ -17,6 +17,7 @@ public class Project extends SchedulingObject {
 		super(taskName, id);
 		managerName = name;
 	}
+	
 	public boolean addTask(Task input) {
 		if (input.getClass() == Task.class && input.getName() != "") {
 
