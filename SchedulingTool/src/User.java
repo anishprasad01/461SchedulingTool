@@ -34,7 +34,10 @@ public class User extends SchedulingObject{
     
     public void printProjects()
 	{
-    	
+    	System.out.println("User " + this.getName() + " is in the following projects.");
+    	for(int i = 0; i < projects.size(); i++) {
+    		System.out.println(projects.get(i).toString());
+    	}
 	}
 
     public boolean addProject(int projectID)

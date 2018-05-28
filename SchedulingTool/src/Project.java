@@ -18,9 +18,21 @@ public class Project extends SchedulingObject {
 		managerName = name;
 	}
 	public boolean addTask(Task input) {
-		if (input.getClass() == Task.class) {
-			this.taskList.add(input);
-			return true;
+		if (input.getClass() == Task.class && input.getName() != "") {
+
+		for(int i = 0; i < taskList.size();i++){
+			if(taskList.get(i).getName() == input.getName()){
+
+				System.out.println("Task is already added, ignoring command");
+				return  false;
+			}
+
+
+		}
+		this.taskList.add(input);
+
+		return true;
+
 		} else {
 			return false;
 		}
@@ -45,10 +57,15 @@ public class Project extends SchedulingObject {
 		}
 	}
 
-	/*public void addTaskByName(String input) {
-		Task newTask = new Task(input);
-		this.taskList.add(newTask);
-	}*/
+	public void setManagerName(String input){
+
+	this.managerName = input;
+
+	}
+
+
+
+
 
 	public void removeTask(Task input) {
 		this.taskList.remove(input);
@@ -63,9 +80,10 @@ public class Project extends SchedulingObject {
 	}
 
 	public void printAllTaskNames() {
-		for (int i = 0; i < taskList.size(); i++) {
-			System.console().writer()
-					.print("Task " + i + ": " + taskList.get(i).getName() + " ID: " + taskList.get(i).getID());
+
+		for (int i = 0; i < this.taskList.size(); i++) {
+		
+		    System.out.println("Task " + i + ": " + taskList.get(i).getName() + " ID: " + taskList.get(i).getID());
 		}
 	}
 
@@ -177,7 +195,7 @@ public class Project extends SchedulingObject {
 	}
 
 	//A method that returns a task whose name is specified as input
-	public Task FindTaskByName(String input){
+	public Task findTaskByName(String input){
 
 		//return task using the getTaskIndexByName method.
 		if(getTaskIndexByName(input) != -1){
