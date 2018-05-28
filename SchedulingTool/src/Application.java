@@ -1,5 +1,8 @@
 import java.util.HashMap;
 import java.util.Scanner;
+
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
+
 import java.io.*;
 
 public class Application {
@@ -54,15 +57,24 @@ public class Application {
 				break;
 				
 			case 7:
-				//purgeData();
+				//listAllUsers();
 				break;
 				
 			case 8:
+				//purgeData();
+				break;
+				
+			case 9:
+				login();
+				break;
+				
+			case 10:
 				saveStateToFile();
+				quit = true;
 				break;
 			}
 		}
-		
+		System.exit(0);
 	}
 	
 	
@@ -72,6 +84,12 @@ public class Application {
 		while(true) {
 			System.out.println("Enter your username.");
 			String username = input.nextLine();
+			if(users.isEmpty()) {
+				System.out.println("No users found in system");
+				System.out.println("Starting user creation wizard");
+				createUser();
+				System.out.println("Logged in as new User");
+			}
 			User temp = users.get(username);
 			if(temp.equals(null) && count != 0) {
 				System.out.println("That user does not exist. Try again");
@@ -96,7 +114,8 @@ public class Application {
 			System.out.println();
 			System.out.println("1 To Create a new User. 2 To Create a new Project. 3 To Create a new Task.");
 			System.out.println("4 To list all Projects. 5 To list Tasks by Project. 6 To Perform Calculations.");
-			System.out.println("7 To Delete ALL Data. 8 To Exit Program");
+			System.out.println("7 To list all users. 8 To Delete ALL Data.");
+			System.out.println("9 To login as a new User. 10 To Exit Program");
 			System.out.println("Please enter a number to choose a function.");
 			choice = input.nextInt();
 			if(choice < 9 && choice > 0) {
