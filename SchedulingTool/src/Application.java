@@ -59,10 +59,11 @@ public class Application {
 				
 			case 8:
 				saveStateToFile();
+				quit = true;
 				break;
 			}
 		}
-		
+		System.exit(0);
 	}
 	
 	
@@ -72,6 +73,9 @@ public class Application {
 		while(true) {
 			System.out.println("Enter your username.");
 			String username = input.nextLine();
+			if(users.isEmpty()) {
+				createUser();
+			}
 			User temp = users.get(username);
 			if(temp.equals(null) && count != 0) {
 				System.out.println("That user does not exist. Try again");
