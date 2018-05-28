@@ -10,6 +10,11 @@ public class User extends SchedulingObject{
     	//ID generated in superclass constructor
         super(username);
     }
+
+    public User(String username, int id)
+	{
+		super(username, id);
+	}
     
     public boolean userInProject(Object projectID) {
     	if(projectID instanceof Integer) {
@@ -29,7 +34,10 @@ public class User extends SchedulingObject{
     
     public void printProjects()
 	{
-    	
+    	System.out.println("User " + this.getName() + " is in the following projects.");
+    	for(int i = 0; i < projects.size(); i++) {
+    		System.out.println(projects.get(i).toString());
+    	}
 	}
 
     public boolean addProject(int projectID)

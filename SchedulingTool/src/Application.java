@@ -35,7 +35,7 @@ public class Application {
 				break;
 				
 			case 3:
-				createTask();
+				//createTask();
 				break;
 			
 			case 4:
@@ -137,13 +137,21 @@ public class Application {
             String line = scanner.nextLine();
             line = line.replaceAll("#", "");
             String array[] = line.split("\\s");
+            // The id comes first and the name is second
             if (array.length == 2)
             {
-                // The User constructor does not take an ID. How will we restore the ID?
+                String name = array[1];
+            	User user = new User(array[1], array[0]);
+                users.put(name, user);
             }
             else if (array.length == 3)
             {
                 // Same issue with ID for Project
+                // Project name is index 1
+                String name = array[1];
+                // Project name, manager name, id
+                Project project = new Project(name, array[2], array[0]);
+                projects.put(name, project);
             }
             else if (array.length == 9)
             {

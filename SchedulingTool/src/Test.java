@@ -33,7 +33,7 @@ public class Test {
 
 
         //remove the 2 to search for task correctly, add the 2 to see what the code does when task is not found
-        Task tempTask = testProject2.FindTaskByName("Code the program");
+        Task tempTask = testProject2.findTaskByName("Code the program");
         if(tempTask == null){
         	System.out.println("Could not find specified task");
 		}

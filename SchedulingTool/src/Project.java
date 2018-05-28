@@ -6,11 +6,17 @@ public class Project extends SchedulingObject {
 	private ArrayList<Task> taskList = new ArrayList<Task>();
 	private String managerName = "";
 
-	public Project(String taskName, String name) {
+	public Project(String taskName, String name)
+	{
 		super(taskName);
 		managerName = name;
 	}
 
+	public Project(String taskName, String name, int id)
+	{
+		super(taskName, id);
+		managerName = name;
+	}
 	public boolean addTask(Task input) {
 		if (input.getClass() == Task.class && input.getName() != "") {
 
@@ -51,9 +57,9 @@ public class Project extends SchedulingObject {
 		}
 	}
 
-	public void setManagerName(String Input){
+	public void setManagerName(String input){
 
-	this.managerName = Input;
+	this.managerName = input;
 
 	}
 
@@ -189,7 +195,7 @@ public class Project extends SchedulingObject {
 	}
 
 	//A method that returns a task whose name is specified as input
-	public Task FindTaskByName(String input){
+	public Task findTaskByName(String input){
 
 		//return task using the getTaskIndexByName method.
 		if(getTaskIndexByName(input) != -1){
