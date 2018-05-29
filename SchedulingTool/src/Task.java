@@ -252,10 +252,22 @@ public class Task extends SchedulingObject {
 	@Override
 	public String toFile() {
 		this.calculateDuration();
-		String retVal = "#" + this.getID() + "," + this.getName() + "," + this.getTaskOwner() + "," + 
-				this.getTaskDuration() + "," + this.getParentProjectID() + "," + this.getPreviousTaskID()
-				 + "," + this.getNextTaskID() + "," + this.getStartDate().toString()
-				 + "," + this.getEndDate().toString() + "##";
+		String retVal;
+		// The previous task id for the first task will be 0
+		if (this.getPreviousTaskID() == 0)
+        {
+            retVal = "#" + this.getID() + "," + this.getName() + "," + this.getTaskOwner() + "," +
+                    this.getTaskDuration() + "," + this.getParentProjectID() + "," + this.getPreviousTaskID()
+                    + "," + this.getNextTaskID() + "," + this.getStartDate().toString()
+                    + "," + this.getEndDate().toString() + "," + this.getEarlyStart() + "," + this.getLateStart() + "##";
+        }
+        else
+        {
+            retVal = "#" + this.getID() + "," + this.getName() + "," + this.getTaskOwner() + "," +
+                    this.getTaskDuration() + "," + this.getParentProjectID() + "," + this.getPreviousTaskID()
+                    + "," + this.getNextTaskID() + "," + this.getStartDate().toString()
+                    + "," + this.getEndDate().toString() + "##";
+        }
 		return retVal;
 	}
 

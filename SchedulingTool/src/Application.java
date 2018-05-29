@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
@@ -199,13 +200,38 @@ public class Application {
                 Project project = new Project(name, array[2], Integer.parseInt(array[0]));
                 projects.put(name, project);
             }
-            else if (array.length == 9)
+            else if (array.length == 9 || array.length == 11)
             {
+                Task task;
+                if (array.length == 9)
+                {
+                    task = new Task(Integer.parseInt(array[0]), array[1], array[2], LocalDate.parse(array[7]), LocalDate.parse(array[8]),
+                            Integer.parseInt(array[4]), Integer.parseInt(array[5]), Integer.parseInt(array[6]));
+                }
+                else
+                {
+                    task = new Task(Integer.parseInt(array[0]), array[1], array[2], LocalDate.parse(array[7]), LocalDate.parse(array[8]),
+                            Integer.parseInt(array[4]), Integer.parseInt(array[5]), Integer.parseInt(array[6]), Long.parseLong(array[9]),
+                            Long.parseLong(array[10]));
+                }
+
+                int projectID = task.getParentProjectID();
+                String projectName = "";
+                // Find the right project to add this task to
+				for (Project project : projects.values())
+				{
+				    // Found the parent project
+					if (project.getID() == projectID)
+                    {
+                        projectName = project.getName();
+                    }
+				}
+				projects.get(projectName).addTask(task);
 
             }
             else
             {
-
+                System.out.println("This line is not formatted correctly");
             }
         }
 
