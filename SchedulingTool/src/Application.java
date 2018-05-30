@@ -63,7 +63,7 @@ public class Application {
 				break;
 				
 			case 8:
-				//purgeData();
+				purgeData();
 				break;
 				
 			case 9:
@@ -143,7 +143,7 @@ public class Application {
 //			return false;
 //		}
 //	}
-	public static void saveToFile() throws IOException
+	private static void saveToFile() throws IOException
     {
 		if (!file.exists())
         {
@@ -177,7 +177,7 @@ public class Application {
 		}
 	}
 
-	public static void restoreFromFile() throws FileNotFoundException
+	private static void restoreFromFile() throws FileNotFoundException
 	{
 	    Scanner scanner = new Scanner(file);
 	    while (scanner.hasNextLine())
@@ -246,7 +246,7 @@ public class Application {
 		return false;
 	}
 	
-	public static void createProject() {
+	private static void createProject() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter a project name");
 		String projectName = input.nextLine();
@@ -261,13 +261,13 @@ public class Application {
 		}
 	}
 	
-	public static void createTask() {
+	private static void createTask() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter the name of the project this task will belong to");
 		String taskProject = input.nextLine();
 	}
 	
-	public static void createUser() {
+	private static void createUser() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter a Name");
 		String name = input.nextLine();
@@ -293,11 +293,11 @@ public class Application {
 		}
 	}
 	
-	public static void listAllProjects() {
+	private static void listAllProjects() {
 		System.out.println(projects.toString());
 	}
 	
-	public static void listTasksByProject() {
+	private static void listTasksByProject() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter the name of the project");
 		String project = input.nextLine();
@@ -312,9 +312,23 @@ public class Application {
 		}
 	}
 	
-	public static void listAllUsers() {
+	private static void listAllUsers() {
 		for(int i = 0; i < users.size(); i++) {
 			System.out.println(users.toString());
+		}
+	}
+	
+	private static void purgeData() {
+		Scanner input = new Scanner(System.in);
+		System.out.println("Are you sure you want to DELETE ALL DATA?\ny or n");
+		String choice = input.next();
+		if(choice.charAt(0) == 'y' || choice.charAt(0) == 'Y') {
+			projects.clear();
+			users.clear();
+			System.out.println("Removed all Data");
+		}
+		else {
+			System.out.println("Removal operation cancelled");
 		}
 	}
 }
