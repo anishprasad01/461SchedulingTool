@@ -59,7 +59,7 @@ public class Application {
 				break;
 				
 			case 7:
-				//listAllUsers();
+				listAllUsers();
 				break;
 				
 			case 8:
@@ -309,6 +309,12 @@ public class Application {
 		}
 		else {
 			System.out.println("That project does not exist");
+		}
+	}
+	
+	public static void listAllUsers() {
+		for(int i = 0; i < users.size(); i++) {
+			System.out.println(users.toString());
 		}
 	}
 }
