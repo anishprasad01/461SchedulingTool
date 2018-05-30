@@ -18,7 +18,7 @@ public class Application {
 		//this.username = inputUsername;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
         file = new File("projectData.csv");
 		Scanner input = new Scanner(System.in);
 		System.out.println("Welcome to The Nameless Scheduler!");
@@ -72,7 +72,7 @@ public class Application {
 				break;
 				
 			case 0:
-				saveStateToFile();
+				saveToFile();
 				quit = true;
 				break;
 			}
@@ -121,7 +121,7 @@ public class Application {
 			System.out.println("9 To login as a new User. 0 To Exit Program");
 			System.out.println("Please enter a number to choose a function.");
 			choice = input.nextInt();
-			if(choice < 9 && choice > 0) {
+			if(choice < 10 && choice > -1) {
 				return choice;
 			}
 			--count;
