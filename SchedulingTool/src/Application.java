@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.time.LocalDate;
@@ -50,7 +51,7 @@ public class Application {
 				break;
 				
 			case 5:
-				//listTasksByProject();
+				listTasksByProject();
 				break;
 				
 			case 6:
@@ -294,5 +295,20 @@ public class Application {
 	
 	public static void listAllProjects() {
 		System.out.println(projects.toString());
+	}
+	
+	public static void listTasksByProject() {
+		Scanner input = new Scanner(System.in);
+		System.out.println("Enter the name of the project");
+		String project = input.nextLine();
+		if(projects.containsKey(project)) {
+			ArrayList<Task> taskList = projects.get(project).getTaskList();
+			for(int i = 0; i < taskList.size(); i++) {
+				System.out.println(taskList.get(i).toString());
+			}
+		}
+		else {
+			System.out.println("That project does not exist");
+		}
 	}
 }
