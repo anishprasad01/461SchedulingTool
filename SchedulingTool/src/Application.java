@@ -23,6 +23,7 @@ public class Application {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Welcome to The Nameless Scheduler!");
 		
+		restoreFromFile();
 		login();
 		
 		System.out.println("Here are your options:");
@@ -70,7 +71,7 @@ public class Application {
 				login();
 				break;
 				
-			case 10:
+			case 0:
 				saveStateToFile();
 				quit = true;
 				break;
@@ -88,8 +89,8 @@ public class Application {
 			String username = input.nextLine();
 			if(users.isEmpty()) {
 				System.out.println("No users found in system");
-				System.out.println("Starting user creation wizard");
-				createUser();
+				System.out.println("Creating user " + username);
+				createUser(username);
 				System.out.println("Logged in as new User");
 			}
 			User temp = users.get(username);
@@ -117,7 +118,7 @@ public class Application {
 			System.out.println("1 To Create a new User. 2 To Create a new Project. 3 To Create a new Task.");
 			System.out.println("4 To list all Projects. 5 To list Tasks by Project. 6 To Perform Calculations.");
 			System.out.println("7 To list all users. 8 To Delete ALL Data.");
-			System.out.println("9 To login as a new User. 10 To Exit Program");
+			System.out.println("9 To login as a new User. 0 To Exit Program");
 			System.out.println("Please enter a number to choose a function.");
 			choice = input.nextInt();
 			if(choice < 9 && choice > 0) {
@@ -238,14 +239,6 @@ public class Application {
 
 	}
 	
-	private static boolean saveStateToFile() {
-		return false;
-	}
-	
-	private static boolean rebuildStateFromFile() {
-		return false;
-	}
-	
 	private static void createProject() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter a project name");
@@ -258,6 +251,7 @@ public class Application {
 			String managerName = input.nextLine();
 			Project toAdd = new Project(projectName, managerName);
 			projects.put(projectName, toAdd);
+			System.out.println("Project created");
 		}
 	}
 	
@@ -293,6 +287,12 @@ public class Application {
 		}
 	}
 	
+	private static void createUser(String username) {
+		User newUser = new User(username);
+		users.put(username, newUser);
+		System.out.println("User Created");
+	}
+	
 	private static void listAllProjects() {
 		System.out.println(projects.toString());
 	}
@@ -313,9 +313,7 @@ public class Application {
 	}
 	
 	private static void listAllUsers() {
-		for(int i = 0; i < users.size(); i++) {
-			System.out.println(users.toString());
-		}
+		System.out.println(users.toString());
 	}
 	
 	private static void purgeData() {
