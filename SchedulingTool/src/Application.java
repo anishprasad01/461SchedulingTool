@@ -44,7 +44,7 @@ public class Application {
 				break;
 				
 			case 3:
-				//createTask();
+				createTask();
 				break;
 			
 			case 4:
@@ -263,10 +263,27 @@ public class Application {
 		String taskOwner = input.nextLine();
 		System.out.println("Please enter the start date in the format YYYY-MM-DD");
 		String sDate = input.nextLine();
-		LocalDate startDate = null;
-		startDate.parse(sDate);
-		System.out.println(startDate.toString());
+		LocalDate startDate = LocalDate.parse(sDate);
+		System.out.println("Please enter the end date in the format YYYY-MM-DD");
+		String eDate = input.nextLine();
+		LocalDate endDate = LocalDate.parse(eDate);
+		System.out.println("Enter parent Task name exactly.");
+		String parent = input.nextLine();
 		
+		if(projects.containsKey(taskProject)) {
+			Project temp = projects.get(taskProject);
+			int parentID;
+			if(temp.getTaskList().contains(parent)) {
+				parentID = temp.getTaskByName(parent).getID();
+				Task toAdd = new Task(taskProject, taskOwner, startDate, endDate, parentID);
+				temp.getTaskList().add(toAdd);
+			}
+			else {
+				Task toAdd = new Task(taskProject, taskOwner, startDate, endDate, 0);
+				temp.getTaskList().add(toAdd);
+			}
+		}
+		System.out.println("Task created");
 	}
 	
 	private static void createUser() {
