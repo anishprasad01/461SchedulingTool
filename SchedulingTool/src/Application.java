@@ -7,7 +7,7 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 import java.io.*;
 
 public class Application {
-	private static File file;
+	//private static File file;
 	//private static String username;
 	private static User currentUser;
 	private static HashMap<String, User> users = new HashMap<String, User>(); //stores user objects, access by string
@@ -18,7 +18,7 @@ public class Application {
 	}
 
 	public static void main(String[] args) {
-        file = new File("projectData.csv");
+        //File file = new File("projectData.csv");
 		Scanner input = new Scanner(System.in);
 		System.out.println("Welcome to The Nameless Scheduler!");
 		
@@ -70,8 +70,14 @@ public class Application {
 				break;
 				
 			case 10:
-				saveStateToFile();
-				quit = true;
+			    try
+                {
+                    saveToFile();
+                }
+                catch (IOException exception)
+                {
+                    quit = true;
+                }
 				break;
 			}
 		}
@@ -144,9 +150,10 @@ public class Application {
 //	}
 	public static void saveToFile() throws IOException
     {
+		File file = new File("projectData.csv");
 		if (!file.exists())
         {
-            createFile();
+            createFile(file);
         }
 
         FileWriter writer = new FileWriter(file);
@@ -166,9 +173,11 @@ public class Application {
                 writer.write(task.toFile() + "\n");
             }
         }
+        writer.close();
+        //file.close();
 	}
 	
-	private static void createFile() throws IOException {
+	private static void createFile(File file) throws IOException {
 		if (file.createNewFile()) {
 			System.out.println("File is created!");
 		} else {
@@ -178,6 +187,7 @@ public class Application {
 
 	public static void restoreFromFile() throws FileNotFoundException
 	{
+        File file = new File("projectData.csv");
 	    Scanner scanner = new Scanner(file);
 	    while (scanner.hasNextLine())
         {
@@ -234,6 +244,7 @@ public class Application {
                 System.out.println("This line is not formatted correctly");
             }
         }
+        //file.close();
 
 	}
 	
