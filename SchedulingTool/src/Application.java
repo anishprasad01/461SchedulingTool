@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.time.LocalDate;
@@ -17,11 +18,11 @@ public class Application {
 		//this.username = inputUsername;
 	}
 
-	public static void main(String[] args) {
-        //File file = new File("projectData.csv");
+	public static void main(String[] args) throws IOException {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Welcome to The Nameless Scheduler!");
 		
+		restoreFromFile();
 		login();
 		
 		System.out.println("Here are your options:");
@@ -42,7 +43,7 @@ public class Application {
 				break;
 				
 			case 3:
-				//createTask();
+				createTask();
 				break;
 			
 			case 4:
@@ -50,7 +51,7 @@ public class Application {
 				break;
 				
 			case 5:
-				//listTasksByProject();
+				listTasksByProject();
 				break;
 				
 			case 6:
@@ -58,18 +59,18 @@ public class Application {
 				break;
 				
 			case 7:
-				//listAllUsers();
+				listAllUsers();
 				break;
 				
 			case 8:
-				//purgeData();
+				purgeData();
 				break;
 				
 			case 9:
 				login();
 				break;
-				
-			case 10:
+
+			case 0:
 			    try
                 {
                     saveToFile();
@@ -93,8 +94,8 @@ public class Application {
 			String username = input.nextLine();
 			if(users.isEmpty()) {
 				System.out.println("No users found in system");
-				System.out.println("Starting user creation wizard");
-				createUser();
+				System.out.println("Creating user " + username);
+				createUser(username);
 				System.out.println("Logged in as new User");
 			}
 			User temp = users.get(username);
@@ -122,10 +123,10 @@ public class Application {
 			System.out.println("1 To Create a new User. 2 To Create a new Project. 3 To Create a new Task.");
 			System.out.println("4 To list all Projects. 5 To list Tasks by Project. 6 To Perform Calculations.");
 			System.out.println("7 To list all users. 8 To Delete ALL Data.");
-			System.out.println("9 To login as a new User. 10 To Exit Program");
+			System.out.println("9 To login as a new User. 0 To Exit Program");
 			System.out.println("Please enter a number to choose a function.");
 			choice = input.nextInt();
-			if(choice < 9 && choice > 0) {
+			if(choice < 10 && choice > -1) {
 				return choice;
 			}
 			--count;
@@ -148,7 +149,7 @@ public class Application {
 //			return false;
 //		}
 //	}
-	public static void saveToFile() throws IOException
+	private static void saveToFile() throws IOException
     {
 		File file = new File("projectData.csv");
 		if (!file.exists())
@@ -185,9 +186,14 @@ public class Application {
 		}
 	}
 
-	public static void restoreFromFile() throws FileNotFoundException
+	private static void restoreFromFile() throws FileNotFoundException
 	{
         File file = new File("projectData.csv");
+        // If the file does not exist, create it
+        if (!file.exists())
+        {
+            createFile(file);
+        }
 	    Scanner scanner = new Scanner(file);
 	    while (scanner.hasNextLine())
         {
@@ -248,15 +254,7 @@ public class Application {
 
 	}
 	
-	private static boolean saveStateToFile() {
-		return false;
-	}
-	
-	private static boolean rebuildStateFromFile() {
-		return false;
-	}
-	
-	public static void createProject() {
+	private static void createProject() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter a project name");
 		String projectName = input.nextLine();
@@ -268,16 +266,42 @@ public class Application {
 			String managerName = input.nextLine();
 			Project toAdd = new Project(projectName, managerName);
 			projects.put(projectName, toAdd);
+			System.out.println("Project created");
 		}
 	}
 	
-	public static void createTask() {
+	private static void createTask() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter the name of the project this task will belong to");
 		String taskProject = input.nextLine();
+		System.out.println("Enter the name of the task owner");
+		String taskOwner = input.nextLine();
+		System.out.println("Please enter the start date in the format YYYY-MM-DD");
+		String sDate = input.nextLine();
+		LocalDate startDate = LocalDate.parse(sDate);
+		System.out.println("Please enter the end date in the format YYYY-MM-DD");
+		String eDate = input.nextLine();
+		LocalDate endDate = LocalDate.parse(eDate);
+		System.out.println("Enter parent Task name exactly.");
+		String parent = input.nextLine();
+		
+		if(projects.containsKey(taskProject)) {
+			Project temp = projects.get(taskProject);
+			int parentID;
+			if(temp.getTaskList().contains(parent)) {
+				parentID = temp.getTaskByName(parent).getID();
+				Task toAdd = new Task(taskProject, taskOwner, startDate, endDate, parentID);
+				temp.getTaskList().add(toAdd);
+			}
+			else {
+				Task toAdd = new Task(taskProject, taskOwner, startDate, endDate, 0);
+				temp.getTaskList().add(toAdd);
+			}
+		}
+		System.out.println("Task created");
 	}
 	
-	public static void createUser() {
+	private static void createUser() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter a Name");
 		String name = input.nextLine();
@@ -303,7 +327,46 @@ public class Application {
 		}
 	}
 	
-	public static void listAllProjects() {
+	private static void createUser(String username) {
+		User newUser = new User(username);
+		users.put(username, newUser);
+		System.out.println("User Created");
+	}
+	
+	private static void listAllProjects() {
 		System.out.println(projects.toString());
+	}
+	
+	private static void listTasksByProject() {
+		Scanner input = new Scanner(System.in);
+		System.out.println("Enter the name of the project");
+		String project = input.nextLine();
+		if(projects.containsKey(project)) {
+			ArrayList<Task> taskList = projects.get(project).getTaskList();
+			for(int i = 0; i < taskList.size(); i++) {
+				System.out.println(taskList.get(i).toString());
+			}
+		}
+		else {
+			System.out.println("That project does not exist");
+		}
+	}
+	
+	private static void listAllUsers() {
+		System.out.println(users.toString());
+	}
+	
+	private static void purgeData() {
+		Scanner input = new Scanner(System.in);
+		System.out.println("Are you sure you want to DELETE ALL DATA?\ny or n");
+		String choice = input.next();
+		if(choice.charAt(0) == 'y' || choice.charAt(0) == 'Y') {
+			projects.clear();
+			users.clear();
+			System.out.println("Removed all Data");
+		}
+		else {
+			System.out.println("Removal operation cancelled");
+		}
 	}
 }
