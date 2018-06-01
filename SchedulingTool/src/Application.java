@@ -259,6 +259,14 @@ public class Application {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter the name of the project this task will belong to");
 		String taskProject = input.nextLine();
+		System.out.println("Enter the name of the task owner");
+		String taskOwner = input.nextLine();
+		System.out.println("Please enter the start date in the format YYYY-MM-DD");
+		String sDate = input.nextLine();
+		LocalDate startDate = null;
+		startDate.parse(sDate);
+		System.out.println(startDate.toString());
+		
 	}
 	
 	private static void createUser() {
