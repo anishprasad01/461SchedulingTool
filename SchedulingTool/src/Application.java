@@ -192,14 +192,20 @@ public class Application {
         // If the file does not exist, create it
         if (!file.exists())
         {
-            createFile(file);
+            try {
+                createFile(file);
+            }
+            catch (IOException io)
+            {
+
+            }
         }
 	    Scanner scanner = new Scanner(file);
 	    while (scanner.hasNextLine())
         {
             String line = scanner.nextLine();
             line = line.replaceAll("#", "");
-            String array[] = line.split("\\s");
+            String array[] = line.split(",");
             // The id comes first and the name is second
             if (array.length == 2)
             {
