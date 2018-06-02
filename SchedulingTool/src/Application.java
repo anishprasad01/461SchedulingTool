@@ -259,7 +259,7 @@ public class Application {
         //file.close();
 
 	}
-	
+
 	private static void createProject() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter a project name");
