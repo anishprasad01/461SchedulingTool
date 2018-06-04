@@ -21,7 +21,6 @@ public class Application {
 	public static void main(String[] args) throws IOException {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Welcome to The Nameless Scheduler!");
-		
 		restoreFromFile();
 		login();
 		
@@ -98,7 +97,6 @@ public class Application {
 				System.out.println("No users found in system");
 				System.out.println("Creating user " + username);
 				createUser(username);
-				System.out.println("Logged in as new User");
 			}
 			User temp = users.get(username);
 			if(temp.equals(null) && count != 0) {
@@ -190,12 +188,14 @@ public class Application {
 	}
 
 	private static void restoreFromFile() throws FileNotFoundException
-	{
+    {
+        System.out.println("Restoring data from file.\n");
         File file = new File("projectData.csv");
         // If the file does not exist, create it
         if (!file.exists())
         {
-            try {
+            try
+            {
                 createFile(file);
             }
             catch (IOException io)
@@ -203,8 +203,8 @@ public class Application {
 
             }
         }
-	    Scanner scanner = new Scanner(file);
-	    while (scanner.hasNextLine())
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNextLine())
         {
             String line = scanner.nextLine();
             line = line.replaceAll("#", "");
@@ -213,7 +213,7 @@ public class Application {
             if (array.length == 2)
             {
                 String name = array[1];
-            	User user = new User(array[1], Integer.parseInt(array[0]));
+                User user = new User(array[1], Integer.parseInt(array[0]));
                 users.put(name, user);
             }
             else if (array.length == 3)
@@ -243,29 +243,26 @@ public class Application {
                 int projectID = task.getParentProjectID();
                 String projectName = "";
                 // Find the right project to add this task to
-				for (Project project : projects.values())
-				{
-				    // Found the parent project
-					if (project.getID() == projectID)
+                for (Project project : projects.values())
+                {
+                    // Found the parent project
+                    if (project.getID() == projectID)
                     {
                         projectName = project.getName();
                     }
-				}
-				Project retrieveProject = projects.get(projectName);
-				if (retrieveProject)
-				{
-					retrieveProject.addTask(task);
-				}
-
+                }
+                Project retrieveProject = projects.get(projectName);
+                if (retrieveProject)
+                {
+                    retrieveProject.addTask(task);
+                }
             }
             else
             {
                 System.out.println("This line is not formatted correctly");
             }
         }
-        //file.close();
-
-	}
+    }
 
 	private static void createProject() {
 		Scanner input = new Scanner(System.in);
@@ -285,10 +282,17 @@ public class Application {
 	
 	private static void createTask() {
 		Scanner input = new Scanner(System.in);
-		System.out.println("Enter the name of the task");
-		String taskName = input.nextLine();
 		System.out.println("Enter the name of the project this task will belong to");
 		String taskProject = input.nextLine();
+		
+		if(!projects.containsKey(taskProject)) {
+			System.out.println("Project does not exist\nStarting project creation wizard\n");
+			createProject();
+			System.out.println();
+		}
+		
+		System.out.println("Enter the name of the task");
+		String taskName = input.nextLine();
 		System.out.println("Enter the name of the task owner");
 		String taskOwner = input.nextLine();
 		System.out.println("Please enter the start date in the format YYYY-MM-DD");
@@ -297,20 +301,47 @@ public class Application {
 		System.out.println("Please enter the end date in the format YYYY-MM-DD");
 		String eDate = input.nextLine();
 		LocalDate endDate = LocalDate.parse(eDate);
-		System.out.println("Enter parent Task name exactly.");
+		System.out.println("Enter parent Task name if applicable, or enter 0 if not");
 		String parent = input.nextLine();
 		
-		if(projects.containsKey(taskProject)) {
-			Project temp = projects.get(taskProject);
-			int parentID;
-			if(temp.getTaskList().contains(parent)) {
-				parentID = temp.getTaskByName(parent).getID();
-				Task toAdd = new Task(taskName, taskOwner, startDate, endDate, parentID);
-				temp.getTaskList().add(toAdd);
+		if(projects.get(taskProject).getTaskList().size() == 0) {
+			System.out.println("Enter an early start value");
+			long es = input.nextLong();
+			System.out.println("Enter a late start value");
+			long ls = input.nextLong();
+			
+			if(projects.containsKey(taskProject) ) {
+				Project temp = projects.get(taskProject);
+				int parentID;
+				if(temp.getTaskList().contains(parent)) {
+					parentID = temp.getTaskByName(parent).getID();
+					Task toAdd = new Task(taskName, taskOwner, startDate, endDate, parentID,
+							es, ls);
+					toAdd.calculateDuration();
+					temp.getTaskList().add(toAdd);
+				}
+				else {
+					Task toAdd = new Task(taskName, taskOwner, startDate, endDate, 0, es, ls);
+					toAdd.calculateDuration();
+					temp.getTaskList().add(toAdd);
+				}
 			}
-			else {
-				Task toAdd = new Task(taskName, taskOwner, startDate, endDate, 0);
-				temp.getTaskList().add(toAdd);
+		}
+		else {
+			if(projects.containsKey(taskProject)) {
+				Project temp = projects.get(taskProject);
+				int parentID;
+				if(temp.getTaskList().contains(parent)) {
+					parentID = temp.getTaskByName(parent).getID();
+					Task toAdd = new Task(taskName, taskOwner, startDate, endDate, parentID);
+					toAdd.calculateDuration();
+					temp.getTaskList().add(toAdd);
+				}
+				else {
+					Task toAdd = new Task(taskName, taskOwner, startDate, endDate, 0);
+					toAdd.calculateDuration();
+					temp.getTaskList().add(toAdd);
+				}
 			}
 		}
 		System.out.println("Task created");
@@ -324,6 +355,8 @@ public class Application {
 		if(users.containsKey(name)) {
 			System.err.println("Error: User already exists.\nOverwrite User?");
 			System.out.println("Y or N?");
+			
+			
 			char overwrite = input.next().charAt(0);
 			if(overwrite == 'y' || overwrite == 'n') {
 				User toAdd = new User(name);
