@@ -20,51 +20,9 @@ public class Task extends SchedulingObject {
     private long lateStart;
     private long lateFinish;
 
-	public Task(String newName, String newOwner, LocalDate newStart, LocalDate newEnd, int parentID, int newPrev, int newNext) {
-		super(newName);
-		taskOwner = newOwner;
-	    //check dates valid
-		if (newEnd.isAfter(newStart))
-		{
-			startDate = newStart;
-			endDate = newEnd;
-		}
-		//check projectIDs valid
-		if (newNext > newPrev)
-		{
-			previousTaskID = newPrev;
-			nextTaskID = newNext;
-		}
-		//set
-		
-		this.setParentProjectID(parentID);
-	}
-
-	// This constructor also takes an id
-    public Task(int id, String newName, String newOwner, LocalDate newStart, LocalDate newEnd, int parentID,
-                int newPrev, int newNext)
-    {
-        super(newName, id);
-        taskOwner = newOwner;
-        //check dates valid
-        if (newEnd.isAfter(newStart))
-        {
-            startDate = newStart;
-            endDate = newEnd;
-        }
-        //check projectIDs valid
-        if (newNext > newPrev)
-        {
-            previousTaskID = newPrev;
-            nextTaskID = newNext;
-        }
-        //set
-
-        this.setParentProjectID(parentID);
-    }
-
     // This constructor also takes an id
-    public Task(int id, String newName, String newOwner, LocalDate newStart, LocalDate newEnd, int parentID,
+    public Task(int id, String newName, String newOwner, LocalDate newStart, 
+    		LocalDate newEnd, int parentID,
                 int newPrev, int newNext, long earlyStart, long lateStart)
     {
         super(newName, id);
@@ -91,36 +49,30 @@ public class Task extends SchedulingObject {
 
         this.setParentProjectID(parentID);
     }
-	public Task(String newName, String newOwner, LocalDate newStart, LocalDate newEnd, int parentID, int newPrev) {
-		super(newName);
-		taskOwner = newOwner;
-		//check dates valid
-		if (newEnd.isAfter(newStart))
-		{
-			startDate = newStart;
-			endDate = newEnd;
-		}
-		//check projectIDs valid
-		if (nextTaskID > newPrev)
-		{
-			previousTaskID = newPrev;
-		}
-		
-		this.setParentProjectID(parentID);
-	}
+    
+    public Task(int id, String newName, String newOwner, LocalDate newStart, 
+    		LocalDate newEnd, int parentID, long earlyStart, long lateStart)
+    {
+        super(newName, id);
+        taskOwner = newOwner;
+        //check dates valid
+        if (newEnd.isAfter(newStart))
+        {
+            startDate = newStart;
+            endDate = newEnd;
+        }
+        
+        if (earlyStart <= lateStart)
+        {
+            this.earlyStart = earlyStart;
+            this.lateStart = lateStart;
+        }
+        //set
+
+        this.setParentProjectID(parentID);
+    }
+
 	
-	public Task(String newName, String newOwner, LocalDate newStart, LocalDate newEnd, int parentID) {
-		super(newName);
-		taskOwner = newOwner;
-		//check dates valid
-		if (newEnd.isAfter(newStart))
-		{
-			startDate = newStart;
-			endDate = newEnd;
-		}
-		
-		this.setParentProjectID(parentID);
-	}
 
 	public Task(SchedulingObject object) {
 		super(object);
@@ -173,8 +125,6 @@ public class Task extends SchedulingObject {
 	}
 	
 	public void calculateDuration() {
-
-
         taskDuration = Period.between(startDate,endDate).getDays();
 	}
 

@@ -74,10 +74,12 @@ public class Application {
 			    try
                 {
                     saveToFile();
+                    System.out.println("Data Saved to File\nExiting Program");
+                    quit = true;
                 }
                 catch (IOException exception)
                 {
-                    quit = true;
+                    System.err.print("ERROR SAVING");
                 }
 				break;
 			}
@@ -110,6 +112,7 @@ public class Application {
 			}
 			else {
 				currentUser = temp;
+				System.out.println("Succesfully logged in as " + username + "\n");
 				break;
 			}
 		}
@@ -278,6 +281,8 @@ public class Application {
 	
 	private static void createTask() {
 		Scanner input = new Scanner(System.in);
+		System.out.println("Enter the name of the task");
+		String taskName = input.nextLine();
 		System.out.println("Enter the name of the project this task will belong to");
 		String taskProject = input.nextLine();
 		System.out.println("Enter the name of the task owner");
@@ -296,11 +301,11 @@ public class Application {
 			int parentID;
 			if(temp.getTaskList().contains(parent)) {
 				parentID = temp.getTaskByName(parent).getID();
-				Task toAdd = new Task(taskProject, taskOwner, startDate, endDate, parentID);
+				Task toAdd = new Task(taskName, taskOwner, startDate, endDate, parentID);
 				temp.getTaskList().add(toAdd);
 			}
 			else {
-				Task toAdd = new Task(taskProject, taskOwner, startDate, endDate, 0);
+				Task toAdd = new Task(taskName, taskOwner, startDate, endDate, 0);
 				temp.getTaskList().add(toAdd);
 			}
 		}
