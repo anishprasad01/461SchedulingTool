@@ -16,15 +16,15 @@ public class Test {
 		testProject2.setName("TestProject2");
         testProject2.setManagerName("Hossam");
 
-		testProject2.addTask(new Task("Code the program", "Rahil", LocalDate.of(2018, 5, 19),
-                LocalDate.of(2018, 5, 30), 0, 2));
-
-		testProject2.addTask(new Task("Test The Program", "Hossam", LocalDate.of(2018, 5, 27),
-				LocalDate.of(2018, 5, 30), 0, 2));
-
-
-		testProject2.addTask(new Task("Code the program", "Rahil", LocalDate.of(2018, 5, 19),
-				LocalDate.of(2018, 5, 30), 0, 2));
+//		testProject2.addTask(new Task("Code the program", "Rahil", LocalDate.of(2018, 5, 19),
+//                LocalDate.of(2018, 5, 30), 0, 2));
+//
+//		testProject2.addTask(new Task("Test The Program", "Hossam", LocalDate.of(2018, 5, 27),
+//				LocalDate.of(2018, 5, 30), 0, 2));
+//
+//
+//		testProject2.addTask(new Task("Code the program", "Rahil", LocalDate.of(2018, 5, 19),
+//				LocalDate.of(2018, 5, 30), 0, 2));
 
 
 		System.out.println(testProject2.toString());
