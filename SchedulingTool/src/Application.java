@@ -21,7 +21,6 @@ public class Application {
 	public static void main(String[] args) throws IOException {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Welcome to The Nameless Scheduler!");
-		
 		restoreFromFile();
 		login();
 		
@@ -190,6 +189,7 @@ public class Application {
 
 	private static void restoreFromFile() throws FileNotFoundException
 	{
+		System.out.println("Restoring data from file.\n");
         File file = new File("projectData.csv");
         // If the file does not exist, create it
         if (!file.exists())
@@ -250,8 +250,6 @@ public class Application {
                         projectName = project.getName();
                     }
 				}
-				projects.get(projectName).addTask(task);
-
             }
             else
             {
@@ -353,6 +351,8 @@ public class Application {
 		if(users.containsKey(name)) {
 			System.err.println("Error: User already exists.\nOverwrite User?");
 			System.out.println("Y or N?");
+			
+			
 			char overwrite = input.next().charAt(0);
 			if(overwrite == 'y' || overwrite == 'n') {
 				User toAdd = new User(name);
