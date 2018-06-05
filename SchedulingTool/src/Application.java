@@ -81,6 +81,10 @@ public class Application {
                     System.err.print("ERROR SAVING");
                 }
 				break;
+				
+			default:
+				System.err.println("\nIncorrect Input\n");
+				break;
 			}
 		}
 		System.exit(0);
@@ -189,7 +193,6 @@ public class Application {
 
 	private static void restoreFromFile() throws FileNotFoundException
     {
-        System.out.println("Restoring data from file.\n");
         File file = new File("projectData.csv");
         // If the file does not exist, create it
         if (!file.exists())
@@ -252,7 +255,7 @@ public class Application {
                     }
                 }
                 Project retrieveProject = projects.get(projectName);
-                if (!retrieveProject.equals(null))
+                if (!(retrieveProject == null))
                 {
                     retrieveProject.addTask(task);
                 }
