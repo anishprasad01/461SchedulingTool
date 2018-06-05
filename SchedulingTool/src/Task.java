@@ -1,5 +1,6 @@
 
 import java.time.*;
+import java.time.temporal.ChronoUnit;
 import java.util.Random;
 
 public class Task extends SchedulingObject {
@@ -284,7 +285,7 @@ public class Task extends SchedulingObject {
 	
 	public void calculateDuration() {
 		if(endDate.isAfter(startDate)) {
-			taskDuration = Period.between(startDate,endDate).getDays();
+			taskDuration = ChronoUnit.DAYS.between(startDate, endDate);
 		}
 		else {
 			return;
@@ -388,7 +389,7 @@ public class Task extends SchedulingObject {
 	public String toString() 
 	{
 		return "Task: " + this.getName() +" Owner: " + taskOwner + ", Start date: " + startDate.toString() + ", End date: "
-	         + endDate.toString() + ", Duration: " + this.getTaskDuration();
+	         + endDate.toString() + ", Duration: " + this.getTaskDuration() + " days";
 		 
 	}
 }

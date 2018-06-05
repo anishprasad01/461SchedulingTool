@@ -304,8 +304,7 @@ public class Application {
 		System.out.println("Please enter the end date in the format YYYY-MM-DD");
 		String eDate = input.nextLine();
 		LocalDate endDate = LocalDate.parse(eDate);
-		System.out.println("Enter parent Task name if applicable, or enter 0 if not");
-		String parent = input.nextLine();
+	
 		
 		if(projects.get(taskProject).getTaskList().size() == 0) {
 			System.out.println("Enter an early start value");
@@ -315,36 +314,20 @@ public class Application {
 			
 			if(projects.containsKey(taskProject) ) {
 				Project temp = projects.get(taskProject);
-				int parentID;
-				if(temp.getTaskList().contains(parent)) {
-					parentID = temp.getTaskByName(parent).getID();
-					Task toAdd = new Task(taskName, taskOwner, startDate, endDate, parentID,
-							es, ls);
-					toAdd.calculateDuration();
-					temp.getTaskList().add(toAdd);
-				}
-				else {
-					Task toAdd = new Task(taskName, taskOwner, startDate, endDate, 0, es, ls);
-					toAdd.calculateDuration();
-					temp.getTaskList().add(toAdd);
-				}
+				int parentID = temp.getID();
+				Task toAdd = new Task(taskName, taskOwner, startDate, endDate, parentID,
+						es, ls);
+				toAdd.calculateDuration();
+				temp.getTaskList().add(toAdd);
 			}
 		}
 		else {
-			if(projects.containsKey(taskProject)) {
+			if(projects.containsKey(taskProject) ) {
 				Project temp = projects.get(taskProject);
-				int parentID;
-				if(temp.getTaskList().contains(parent)) {
-					parentID = temp.getTaskByName(parent).getID();
-					Task toAdd = new Task(taskName, taskOwner, startDate, endDate, parentID);
-					toAdd.calculateDuration();
-					temp.getTaskList().add(toAdd);
-				}
-				else {
-					Task toAdd = new Task(taskName, taskOwner, startDate, endDate, 0);
-					toAdd.calculateDuration();
-					temp.getTaskList().add(toAdd);
-				}
+				int parentID = temp.getID();
+				Task toAdd = new Task(taskName, taskOwner, startDate, endDate, parentID);
+				toAdd.calculateDuration();
+				temp.getTaskList().add(toAdd);
 			}
 		}
 		System.out.println("Task created");
@@ -419,5 +402,9 @@ public class Application {
 		else {
 			System.out.println("Removal operation cancelled");
 		}
+	}
+	
+	public static void performCalculations() {
+		
 	}
 }
