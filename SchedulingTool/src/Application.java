@@ -1,3 +1,6 @@
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
+import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -284,7 +287,22 @@ public class Application {
 			System.out.println("Project created");
 		}
 	}
-	
+	 static void SetStartDate(LocalDate dateToSet){
+		 Scanner scanner = new Scanner(System.in);
+		 System.out.println("Please enter the start date in the format YYYY-MM-DD");
+		 String input = scanner.nextLine();
+		 System.out.println(input);
+		 dateToSet = LocalDate.parse(input);
+
+	}
+	static void SetEndDate(LocalDate dateToSet){
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Please enter the end date in the format YYYY-MM-DD");
+		String input = scanner.nextLine();
+		System.out.println(input);
+		dateToSet = LocalDate.parse(input);
+
+	}
 	private static void createTask() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter the name of the project this task will belong to");
@@ -300,12 +318,25 @@ public class Application {
 		String taskName = input.nextLine();
 		System.out.println("Enter the name of the task owner");
 		String taskOwner = input.nextLine();
-		System.out.println("Please enter the start date in the format YYYY-MM-DD");
-		String sDate = input.nextLine();
-		LocalDate startDate = LocalDate.parse(sDate);
-		System.out.println("Please enter the end date in the format YYYY-MM-DD");
-		String eDate = input.nextLine();
-		LocalDate endDate = LocalDate.parse(eDate);
+		LocalDate StartDate = LocalDate.MIN;
+		LocalDate EndDate = LocalDate.MIN;
+    		try {
+                SetStartDate(StartDate);
+			} catch (DateTimeException e) {
+
+				System.out.println("You inserted an incorrect date");
+				SetStartDate(StartDate);
+			}
+
+		try {
+			SetEndDate(EndDate);
+		} catch (DateTimeException e) {
+
+			System.out.println("You inserted an incorrect date");
+			SetStartDate(EndDate);
+		}
+
+
 		System.out.println("Enter the name of the previous task, or 0 if not applicable.");
 		String prevTask = input.nextLine();
 		Task prevTemp = null;
@@ -330,7 +361,7 @@ public class Application {
 			if(projects.containsKey(taskProject) ) {
 				Project tempProject = projects.get(taskProject);
 				int parentID = tempProject.getID();
-				Task toAdd = new Task(taskName, taskOwner, startDate, endDate, parentID,
+				Task toAdd = new Task(taskName, taskOwner, StartDate, EndDate, parentID,
 						prevID, 0, es, ls);
 				prevTemp.setNextTaskID(tempProject.getID());
 				toAdd.calculateDuration();
@@ -341,7 +372,7 @@ public class Application {
 			if(projects.containsKey(taskProject) ) {
 				Project tempProject = projects.get(taskProject);
 				int parentID = tempProject.getID();
-				Task toAdd = new Task(taskName, taskOwner, startDate, endDate, parentID, prevID, 0);
+				Task toAdd = new Task(taskName, taskOwner, StartDate, EndDate, parentID, prevID, 0);
 				prevTemp.setNextTaskID(tempProject.getID());
 				toAdd.calculateDuration();
 				tempProject.getTaskList().add(toAdd);
@@ -349,7 +380,8 @@ public class Application {
 		}
 		System.out.println("Task created");
 	}
-	
+
+
 	private static void createUser() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter a Name");
@@ -495,4 +527,6 @@ public class Application {
 
 
     }
+
+
 }
