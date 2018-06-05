@@ -42,6 +42,7 @@ public class Task extends SchedulingObject {
         //set
 
         this.setParentProjectID(parentID);
+        this.calculateDuration();
     }
     
  // This constructor also takes an id
@@ -72,6 +73,8 @@ public class Task extends SchedulingObject {
         //set
 
         this.setParentProjectID(parentID);
+        this.calculateDuration();
+
     }
     
     // This constructor also takes an id
@@ -102,6 +105,8 @@ public class Task extends SchedulingObject {
         //set
 
         this.setParentProjectID(parentID);
+        this.calculateDuration();
+
     }
     
     public Task(int id, String newName, String newOwner, LocalDate newStart, 
@@ -124,6 +129,8 @@ public class Task extends SchedulingObject {
         //set
 
         this.setParentProjectID(parentID);
+        this.calculateDuration();
+
     }
     
     public Task(String newName, String newOwner, LocalDate newStart, 
@@ -146,6 +153,8 @@ public class Task extends SchedulingObject {
         //set
 
         this.setParentProjectID(parentID);
+        this.calculateDuration();
+
     }
     
  // This constructor also takes an id
@@ -176,6 +185,8 @@ public class Task extends SchedulingObject {
         //set
 
         this.setParentProjectID(parentID);
+        this.calculateDuration();
+
     }
     
     // This constructor also takes an id
@@ -206,6 +217,8 @@ public class Task extends SchedulingObject {
         //set
 
         this.setParentProjectID(parentID);
+        this.calculateDuration();
+
     }
     
     public Task(int id, String newName, String newOwner, LocalDate newStart, 
@@ -228,6 +241,8 @@ public class Task extends SchedulingObject {
         //set
 
         this.setParentProjectID(parentID);
+        this.calculateDuration();
+
     }
 
 
