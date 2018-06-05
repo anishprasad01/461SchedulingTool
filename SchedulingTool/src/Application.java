@@ -287,22 +287,7 @@ public class Application {
 			System.out.println("Project created");
 		}
 	}
-	 static void SetStartDate(LocalDate dateToSet){
-		 Scanner scanner = new Scanner(System.in);
-		 System.out.println("Please enter the start date in the format YYYY-MM-DD");
-		 String input = scanner.nextLine();
-		 System.out.println(input);
-		 dateToSet = LocalDate.parse(input);
 
-	}
-	static void SetEndDate(LocalDate dateToSet){
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("Please enter the end date in the format YYYY-MM-DD");
-		String input = scanner.nextLine();
-		System.out.println(input);
-		dateToSet = LocalDate.parse(input);
-
-	}
 	private static void createTask() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter the name of the project this task will belong to");
@@ -316,26 +301,63 @@ public class Application {
 		
 		System.out.println("Enter the name of the task");
 		String taskName = input.nextLine();
+
 		System.out.println("Enter the name of the task owner");
 		String taskOwner = input.nextLine();
 		LocalDate StartDate = LocalDate.MIN;
 		LocalDate EndDate = LocalDate.MIN;
     		try {
-                SetStartDate(StartDate);
-			} catch (DateTimeException e) {
+				System.out.println("Please enter the start date in the format YYYY-MM-DD");
+				String date = input.nextLine();
+				StartDate = LocalDate.parse(date);
+				System.out.println("Date: " + StartDate);
+			} catch (Exception e) {
 
 				System.out.println("You inserted an incorrect date");
-				SetStartDate(StartDate);
+				System.out.println("Please enter the start date in the format YYYY-MM-DD");
+				String date = input.nextLine();
+				StartDate = LocalDate.parse(date);
 			}
+		Boolean DateIsSet = false;
+		while (DateIsSet == false) {
 
-		try {
-			SetEndDate(EndDate);
-		} catch (DateTimeException e) {
+			try {
+			System.out.println("Please enter the end date in the format YYYY-MM-DD");
+			String date = input.nextLine();
+			EndDate = LocalDate.parse(date);
 
-			System.out.println("You inserted an incorrect date");
-			SetStartDate(EndDate);
-		}
 
+					if (EndDate.isBefore(StartDate)) {
+
+						throw new Exception("End Date can not come before Start Date");
+
+					}
+
+					DateIsSet = true;
+				} catch (Exception e) {
+					if (e.getMessage() == "End Date can not come before Start Date") {
+						System.out.println("End date can not be due before Start Date for a task");
+					} else {
+						System.out.println("You inserted an incorrect date");
+					}
+					System.out.println("Please enter the end date in the format YYYY-MM-DD");
+					String date = input.nextLine();
+					EndDate = LocalDate.parse(date);
+
+				if (EndDate.isBefore(StartDate)) {
+
+                 DateIsSet = false;
+                 System.out.println("End date can not be due before Start Date for a task");
+
+				}
+				else{
+					DateIsSet = true;
+				}
+
+
+
+			}
+			}
 
 		System.out.println("Enter the name of the previous task, or 0 if not applicable.");
 		String prevTask = input.nextLine();
