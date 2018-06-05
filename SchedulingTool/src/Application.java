@@ -252,7 +252,7 @@ public class Application {
                     }
                 }
                 Project retrieveProject = projects.get(projectName);
-                if (retrieveProject)
+                if (!retrieveProject.equals(null))
                 {
                     retrieveProject.addTask(task);
                 }
