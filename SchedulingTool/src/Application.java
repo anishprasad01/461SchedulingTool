@@ -304,6 +304,19 @@ public class Application {
 		System.out.println("Please enter the end date in the format YYYY-MM-DD");
 		String eDate = input.nextLine();
 		LocalDate endDate = LocalDate.parse(eDate);
+		System.out.println("Enter the name of the previous task, or 0 if not applicable.");
+		String prevTask = input.nextLine();
+		Task prevTemp = null;
+		int prevID = 0;
+		
+		if(prevTask.equals("0")) {
+			System.out.println("Previous Task does not exist");
+		}
+		else {
+			prevTemp = projects.get(taskProject).getTaskByName(prevTask);
+			prevID = prevTemp.getID();
+
+		}
 	
 		
 		if(projects.get(taskProject).getTaskList().size() == 0) {
@@ -313,21 +326,23 @@ public class Application {
 			long ls = input.nextLong();
 			
 			if(projects.containsKey(taskProject) ) {
-				Project temp = projects.get(taskProject);
-				int parentID = temp.getID();
+				Project tempProject = projects.get(taskProject);
+				int parentID = tempProject.getID();
 				Task toAdd = new Task(taskName, taskOwner, startDate, endDate, parentID,
-						es, ls);
+						prevID, 0, es, ls);
+				prevTemp.setNextTaskID(tempProject.getID());
 				toAdd.calculateDuration();
-				temp.getTaskList().add(toAdd);
+				tempProject.getTaskList().add(toAdd);
 			}
 		}
 		else {
 			if(projects.containsKey(taskProject) ) {
-				Project temp = projects.get(taskProject);
-				int parentID = temp.getID();
-				Task toAdd = new Task(taskName, taskOwner, startDate, endDate, parentID);
+				Project tempProject = projects.get(taskProject);
+				int parentID = tempProject.getID();
+				Task toAdd = new Task(taskName, taskOwner, startDate, endDate, parentID, prevID, 0);
+				prevTemp.setNextTaskID(tempProject.getID());
 				toAdd.calculateDuration();
-				temp.getTaskList().add(toAdd);
+				tempProject.getTaskList().add(toAdd);
 			}
 		}
 		System.out.println("Task created");

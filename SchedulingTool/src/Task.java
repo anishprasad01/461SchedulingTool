@@ -42,7 +42,6 @@ public class Task extends SchedulingObject {
         //set
 
         this.setParentProjectID(parentID);
-        this.calculateDuration();
     }
     
  // This constructor also takes an id
@@ -73,8 +72,6 @@ public class Task extends SchedulingObject {
         //set
 
         this.setParentProjectID(parentID);
-        this.calculateDuration();
-
     }
     
     // This constructor also takes an id
@@ -105,8 +102,6 @@ public class Task extends SchedulingObject {
         //set
 
         this.setParentProjectID(parentID);
-        this.calculateDuration();
-
     }
     
     public Task(int id, String newName, String newOwner, LocalDate newStart, 
@@ -129,8 +124,6 @@ public class Task extends SchedulingObject {
         //set
 
         this.setParentProjectID(parentID);
-        this.calculateDuration();
-
     }
     
     public Task(String newName, String newOwner, LocalDate newStart, 
@@ -153,8 +146,6 @@ public class Task extends SchedulingObject {
         //set
 
         this.setParentProjectID(parentID);
-        this.calculateDuration();
-
     }
     
  // This constructor also takes an id
@@ -185,8 +176,6 @@ public class Task extends SchedulingObject {
         //set
 
         this.setParentProjectID(parentID);
-        this.calculateDuration();
-
     }
     
     // This constructor also takes an id
@@ -217,8 +206,6 @@ public class Task extends SchedulingObject {
         //set
 
         this.setParentProjectID(parentID);
-        this.calculateDuration();
-
     }
     
     public Task(int id, String newName, String newOwner, LocalDate newStart, 
@@ -241,8 +228,6 @@ public class Task extends SchedulingObject {
         //set
 
         this.setParentProjectID(parentID);
-        this.calculateDuration();
-
     }
 
 
@@ -404,7 +389,7 @@ public class Task extends SchedulingObject {
 	public String toString() 
 	{
 		return "Task: " + this.getName() +" Owner: " + taskOwner + ", Start date: " + startDate.toString() + ", End date: "
-	         + endDate.toString() + ", Duration: " + this.getTaskDuration() + " days";
+	         + endDate.toString() + ", Duration: " + this.getTaskDuration();
 		 
 	}
 }
