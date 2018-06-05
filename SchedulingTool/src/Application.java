@@ -356,7 +356,8 @@ public class Application {
 		String name = input.nextLine();
 		//if the user in map already
 		if(users.containsKey(name)) {
-			System.err.println("Error: User already exists.\nOverwrite User?");
+			System.err.println("Error: User already exists");
+			System.err.println("Overwrite User?");
 			System.out.println("Y or N?");
 			
 			
