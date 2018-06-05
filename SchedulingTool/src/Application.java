@@ -362,7 +362,7 @@ public class Application {
 			
 			
 			char overwrite = input.next().charAt(0);
-			if(overwrite == 'y' || overwrite == 'n') {
+			if(overwrite == 'y' || overwrite == 'Y') {
 				User toAdd = new User(name);
 				users.put(name, toAdd);
 				System.out.println("User Overwritten");
