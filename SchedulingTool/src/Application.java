@@ -54,7 +54,9 @@ public class Application {
 				break;
 				
 			case 6:
-				//performCalculations();
+
+
+			   performCalculations();
 				break;
 				
 			case 7:
@@ -420,6 +422,76 @@ public class Application {
 	}
 	
 	public static void performCalculations() {
-		
-	}
+
+	    int Operation = 0;
+	    float input1 = 0;
+	    float input2 = 0;
+	    Scanner input = new Scanner(System.in);
+
+
+	    System.out.println("Please enter first number");
+
+	    input1 = input.nextFloat();
+
+	    System.out.println("Please enter second number");
+
+	    input2 = input.nextFloat();
+
+	    System.out.println("Please enter operation value");
+
+        System.out.println("1: addition");
+        System.out.println("2: subtraction");
+        System.out.println("3: division");
+        System.out.println("4: multiplication");
+	    System.out.println("5: remainder");
+        System.out.println("6: power");
+        System.out.println("");
+        Operation = input.nextInt();
+
+        if (Operation == 1) {
+
+            System.out.println("Result is: " + (input1 + input2));
+
+        }
+
+       else if (Operation == 2) {
+
+            System.out.println("Result is: " + (input1 - input2));
+
+        }
+
+      else  if (Operation == 3) {
+
+            System.out.println("Result is: " + (input1 / input2));
+
+        }
+
+       else if (Operation == 4) {
+
+            System.out.println("Result is: " + (input1 * input2));
+
+        }
+        else if (Operation == 5) {
+
+            System.out.println("Result is: " + (input1 % input2));
+
+        }
+        else if (Operation == 6) {
+
+            System.out.println("Result is: " + (  Math.pow(input1,input2)));
+        }
+
+
+        else{
+
+            System.out.println("Invalid Choice: " + Operation);
+
+            System.out.println("Invalid Operation, please enter +,-,*,/,% or ^");
+
+
+
+        }
+
+
+    }
 }
