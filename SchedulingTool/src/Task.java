@@ -40,7 +40,8 @@ public class Task extends SchedulingObject {
             this.lateStart = lateStart;
         }
         //set
-
+        
+        this.calculateDuration();
         this.setParentProjectID(parentID);
     }
     
@@ -70,7 +71,7 @@ public class Task extends SchedulingObject {
             this.lateStart = lateStart;
         }
         //set
-
+        this.calculateDuration();
         this.setParentProjectID(parentID);
     }
     
@@ -100,7 +101,7 @@ public class Task extends SchedulingObject {
             this.lateStart = lateStart;
         }
         //set
-
+        this.calculateDuration();
         this.setParentProjectID(parentID);
     }
     
@@ -122,7 +123,7 @@ public class Task extends SchedulingObject {
             this.lateStart = lateStart;
         }
         //set
-
+        this.calculateDuration();
         this.setParentProjectID(parentID);
     }
     
@@ -144,7 +145,7 @@ public class Task extends SchedulingObject {
             this.lateStart = lateStart;
         }
         //set
-
+        this.calculateDuration();
         this.setParentProjectID(parentID);
     }
     
@@ -174,7 +175,7 @@ public class Task extends SchedulingObject {
             this.lateStart = lateStart;
         }
         //set
-
+        this.calculateDuration();
         this.setParentProjectID(parentID);
     }
     
@@ -204,7 +205,7 @@ public class Task extends SchedulingObject {
             this.lateStart = lateStart;
         }
         //set
-
+        this.calculateDuration();
         this.setParentProjectID(parentID);
     }
     
@@ -226,12 +227,9 @@ public class Task extends SchedulingObject {
             this.lateStart = lateStart;
         }
         //set
-
+        this.calculateDuration();
         this.setParentProjectID(parentID);
     }
-
-
-	
 
 	public Task(SchedulingObject object) {
 		super(object);
@@ -388,8 +386,9 @@ public class Task extends SchedulingObject {
 	@Override
 	public String toString() 
 	{
-		return "Task: " + this.getName() +" Owner: " + taskOwner + ", Start date: " + startDate.toString() + ", End date: "
-	         + endDate.toString() + ", Duration: " + this.getTaskDuration();
+		return "ID: " + this.getID() + " Task: " + this.getName() +" Owner: " + taskOwner + ", Start date: " + startDate.toString() + ", End date: "
+	         + endDate.toString() + ", Duration: " + this.getTaskDuration() + "\nPrevious Task: " + this.getPreviousTaskID()
+		+ " Next Task: " + this.getNextTaskID();
 		 
 	}
 }
