@@ -538,7 +538,6 @@ public class Application {
 				int parentID = tempProject.getID();
 				Task toAdd = new Task(taskName, taskOwner, StartDate, EndDate, parentID,
 						prevID, 0, es, ls);
-				tempProject.addTask(toAdd);
 				if(prevTemp != null) {
 					prevTemp.setNextTaskID(tempProject.getID());
 				}
