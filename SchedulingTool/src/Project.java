@@ -180,7 +180,7 @@ public class Project extends SchedulingObject {
 
 			//return earlystart of current activity - early finish of next activity
 
-			return (taskList.get(getTaskIndexByName(NextActivity)).getEarlyStart() - taskList.get(getTaskIndexByName(currentActivity)).getEarlyFinish());
+			return (taskList.get(getTaskIndexByName(currentActivity)).getEarlyFinish() - taskList.get(getTaskIndexByName(NextActivity)).getEarlyStart());
 
 		}
 
