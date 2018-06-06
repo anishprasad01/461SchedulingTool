@@ -157,7 +157,7 @@ public class Project extends SchedulingObject {
 	//it is a helper for findTaskByName() and it returns -1 if fails.
 	private int getTaskIndexByName(String input) {
 		for (int i = 0; i < taskList.size(); i++) {
-			if (taskList.get(i).getName() == input) {
+			if (taskList.get(i).getName().trim().equals(input.trim())) {
 
 				return i;
 			}
@@ -174,6 +174,7 @@ public class Project extends SchedulingObject {
 		if (getTaskIndexByName(currentActivity) == -1 || getTaskIndexByName(NextActivity) == -1) {
 			//if either activity is not found
 
+			System.out.println("One of the activities not found");
 
 			return -1;
 		} else {
@@ -195,11 +196,14 @@ public class Project extends SchedulingObject {
 		if(getTaskIndexByName(currentActivity) == -1){
 
 			//if activity is not found by name
-
+            System.out.println("Activity not found");
 			return -1;
 		}
 		else{
 			//return late finish - early finish of this activity
+            System.out.println(taskList.get(getTaskIndexByName(currentActivity)).getLateFinish());
+
+			System.out.println(taskList.get(getTaskIndexByName(currentActivity)).getEarlyFinish());
 
 			return (taskList.get(getTaskIndexByName(currentActivity)).getLateFinish() - taskList.get(getTaskIndexByName(currentActivity)).getEarlyFinish());
 

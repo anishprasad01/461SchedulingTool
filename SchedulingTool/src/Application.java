@@ -1,6 +1,3 @@
-import com.sun.deploy.util.StringUtils;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -338,23 +335,10 @@ public class Application {
 
 	private static void createTask() {
 		Scanner input = new Scanner(System.in);
-		boolean taskProjectSet = false;
-		String taskProject = "";
-
-		while (taskProjectSet == false) {
-
-			System.out.println("Enter the name of the project this task will belong to");
-			taskProject = input.nextLine();
-
-			if(!checkStringIsValid(taskProject)){
-
-				System.out.println("Project name cannot be empty");
-			}
-			else{
-				taskProjectSet = true;
-			}
-
-		}
+		System.out.println("Enter the name of the project this task will belong to");
+		String taskProject = input.nextLine();
+		long es = 0;
+		long ls = 0;
 
 		if(!projects.containsKey(taskProject)) {
 			System.out.println("Project does not exist\nStarting project creation wizard\n");
@@ -362,194 +346,60 @@ public class Application {
 			System.out.println();
 		}
 		
-		String taskName = "";
-		boolean taskNameSet = false;
-
-		while (taskNameSet == false) {
-
-			System.out.println("Enter the name of the task");
-			taskName = input.nextLine();
-
-			if(!checkStringIsValid(taskName)){
-
-				System.out.println("Task name cannot be empty");
-			}
-			else{
-				taskNameSet = true;
-			}
-
-		}
-        String taskOwner ="";
-		boolean taskOwnerSet = false;
-		while (taskOwnerSet == false) {
-			System.out.println("Enter the name of the task owner");
-			taskOwner = input.nextLine();
-			if(!checkStringIsValid(taskOwner)){
-
-				System.out.println("Task owner name cannot be empty");
-			}
-			else{
-				taskOwnerSet = true;
-			}
-
-
-		}
-		LocalDate StartDate = LocalDate.MIN;
-		LocalDate EndDate = LocalDate.MIN;
-    		try {
-				System.out.println("Please enter the start date in the format YYYY-MM-DD");
-				String date = input.nextLine();
-				StartDate = LocalDate.parse(date);
-			} catch (Exception e) {
-
-				System.out.println("You inserted an incorrect date");
-				System.out.println("Please enter the start date in the format YYYY-MM-DD");
-				String date = input.nextLine();
-				StartDate = LocalDate.parse(date);
-			}
-		Boolean DateIsSet = false;
-		while (DateIsSet == false) {
-
-			try {
-			System.out.println("Please enter the end date in the format YYYY-MM-DD");
-			String date = input.nextLine();
-			EndDate = LocalDate.parse(date);
-
-
-					if (EndDate.isBefore(StartDate)) {
-
-						throw new Exception("End Date can not come before Start Date");
-
-					}
-
-					DateIsSet = true;
-				} catch (Exception e) {
-					if (e.getMessage() == "End Date can not come before Start Date") {
-						System.out.println("End date can not be due before Start Date for a task");
-					} else {
-						System.out.println("You inserted an incorrect date");
-					}
-					System.out.println("Please enter the end date in the format YYYY-MM-DD");
-					String date = input.nextLine();
-					EndDate = LocalDate.parse(date);
-
-				if (EndDate.isBefore(StartDate)) {
-
-                 DateIsSet = false;
-                 System.out.println("End date can not be due before Start Date for a task");
-
-				}
-				else{
-					DateIsSet = true;
-				}
-
-
-
-			}
-			}
-
+		System.out.println("Enter the name of the task");
+		String taskName = input.nextLine();
+		System.out.println("Enter the name of the task owner");
+		String taskOwner = input.nextLine();
+		System.out.println("Please enter the start date in the format YYYY-MM-DD");
+		String sDate = input.nextLine();
+		LocalDate startDate = LocalDate.parse(sDate);
+		System.out.println("Please enter the end date in the format YYYY-MM-DD");
+		String eDate = input.nextLine();
+		LocalDate endDate = LocalDate.parse(eDate);
 		System.out.println("Enter the name of the previous task, or 0 if not applicable.");
-		String prevTask ="";
-		boolean skip = false;
-
-		try {
-			 prevTask = input.nextLine();
-		}
-		catch (Exception e){
-			System.out.println("Something went wrong, skipping...");
-			skip = true;
-		}
+		String prevTask = input.nextLine();
 		Task prevTemp = null;
 		int prevID = 0;
-		if(prevTask.trim().equals("0")) {
+		
+		if(prevTask.equals("0")) {
 			System.out.println("Previous Task does not exist");
-		   skip = true;
 		}
 		else {
-
 			prevTemp = projects.get(taskProject).getTaskByName(prevTask);
-			while (prevTemp == null && skip == false){
-				System.out.println("Task not found in project");
-				System.out.println("Enter the name of the previous task, or 0 if not applicable.");
-				prevTask = input.nextLine();
-				if(prevTask.trim().equals("0")){
-					skip = true;
-				}
-
-				else {
-					prevTemp = projects.get(taskProject).getTaskByName(prevTask);
-					prevID = prevTemp.getID();
-
-				}
-			}
+			prevID = prevTemp.getID();
 
 		}
-	
-		
-		if( projects.get(taskProject).getTaskList().size() == 0) {
+		if(projects.get(taskProject) != null && projects.get(taskProject).getTaskList().size() == 0) {
 			System.out.println("Enter an early start value");
-			long es = 0;
-
-				try {
-
-                  es = input.nextLong();
-
-				} catch (Exception e) {
-					System.out.println("You did not enter a valid number");
-					System.out.println("Setting early start as 0");
-
-					es = 0;
-
-				}
-               if(es <0){
-					System.out.println("Early start can not be less than zero, setting early to zero");
-					es = 0;
-			   }
+			 es = input.nextLong();
 			System.out.println("Enter a late start value");
-			long ls = 0;
-			try {
-
-				ls = input.nextLong();
-
-			} catch (Exception e) {
-				System.out.println("You did not enter a valid number");
-				System.out.println("Setting late start as zero");
-
-				ls = 0;
-
-			}
-
-            if(ls < 0){
-
-				System.out.println("Late start can not be less than zero, setting late start to zero");
-				ls = 0;
-			}
-
-
-			while(es > ls){
-				System.out.println("Late Start can not be before Early Start");
-				System.out.println("Enter an early start value");
-				 es = input.nextLong();
-				System.out.println("Enter a late start value");
-				 ls = input.nextLong();
-
-			}
-			if(projects.containsKey(taskProject) ) {
+			 ls = input.nextLong();
+			
+ 			if(projects.containsKey(taskProject) ) {
 				Project tempProject = projects.get(taskProject);
 				int parentID = tempProject.getID();
-				Task toAdd = new Task(taskName, taskOwner, StartDate, EndDate, parentID,
+				Task toAdd = new Task(taskName, taskOwner, startDate, endDate, parentID,
 						prevID, 0, es, ls);
-				if(prevTemp != null) {
-					prevTemp.setNextTaskID(tempProject.getID());
-				}
-
+				//prevTemp.setNextTaskID(tempProject.getID());
 				toAdd.calculateDuration();
 				tempProject.getTaskList().add(toAdd);
 			}
 		}
-
+		else {
+			if(projects.containsKey(taskProject) ) {
+				Project tempProject = projects.get(taskProject);
+				int parentID = tempProject.getID();
+				//     public Task(String newName, String newOwner, LocalDate newStart,
+				//    		LocalDate newEnd, int parentID,
+				//                int newPrev, int newNext, long earlyStart, long lateStart)
+				Task toAdd = new Task(taskName, taskOwner, startDate, endDate, parentID, prevID, 0);
+				prevTemp.setNextTaskID(tempProject.getID());
+				toAdd.calculateDuration();
+				tempProject.getTaskList().add(toAdd);
+			}
+		}
 		System.out.println("Task created");
-	}
+}
 
 
 	private static void createUser() {
@@ -632,74 +482,54 @@ public class Application {
 	
 	public static void performCalculations() {
 
-	    int Operation = 0;
+	    //int Operation = 0;
 	    float input1 = 0;
 	    float input2 = 0;
 	    Scanner input = new Scanner(System.in);
 
+	    System.out.println("Do you want to calculate free float or total float? Enter f or t");
+        String operation = input.nextLine();
 
-	    System.out.println("Please enter first number");
+        System.out.println("Enter the name of the project");
+        String projectString = input.nextLine();
+        Project project = projects.get(projectString);
 
-	    input1 = input.nextFloat();
+        if (operation.equals("f")) {
 
-	    System.out.println("Please enter second number");
+            System.out.println("Enter the name of the current activity.");
+			System.out.println("Here are your options: ");
+			for(int i = 0; i < project.getTaskList().size();i++){
+				System.out.println(project.getTaskList().get(i));
+			}
+            String current = input.nextLine();
 
-	    input2 = input.nextFloat();
+            System.out.println("Enter the name of the next activity.");
+			System.out.println("Here are your options: ");
+			for(int i = 0; i < project.getTaskList().size();i++){
+				System.out.println(project.getTaskList().get(i));
+			}
+            String next = input.nextLine();
 
-	    System.out.println("Please enter operation value");
-
-        System.out.println("1: addition");
-        System.out.println("2: subtraction");
-        System.out.println("3: division");
-        System.out.println("4: multiplication");
-	    System.out.println("5: remainder");
-        System.out.println("6: power");
-        System.out.println("");
-        Operation = input.nextInt();
-
-        if (Operation == 1) {
-
-            System.out.println("Result is: " + (input1 + input2));
-
-        }
-
-       else if (Operation == 2) {
-
-            System.out.println("Result is: " + (input1 - input2));
+            System.out.println("Free float = " + project.getFreeFloat(current, next));
 
         }
 
-      else  if (Operation == 3) {
+       else if (operation.equals("t")) {
+			try {
+				System.out.println("Enter the name of the current activity.");
+				System.out.println("Here are your options: ");
+				for(int i = 0; i < project.getTaskList().size();i++){
+					System.out.println(project.getTaskList().get(i));
+				}
+				String current = input.nextLine();
+				System.out.println("Total float = " + project.getTotalFloat(current));
+			}
+			catch (Exception e){
+				System.out.println("Something went wrong, most likely activity is not found.");
+				System.out.println("Check spelling of activity (case sensitive)");
 
-            System.out.println("Result is: " + (input1 / input2));
-
-        }
-
-       else if (Operation == 4) {
-
-            System.out.println("Result is: " + (input1 * input2));
-
-        }
-        else if (Operation == 5) {
-
-            System.out.println("Result is: " + (input1 % input2));
-
-        }
-        else if (Operation == 6) {
-
-            System.out.println("Result is: " + (  Math.pow(input1,input2)));
-        }
-
-
-        else{
-
-            System.out.println("Invalid Choice: " + Operation);
-
-            System.out.println("Invalid Operation, please enter +,-,*,/,% or ^");
-
-
-
-        }
+			}
+		}
 
 
     }

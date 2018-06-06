@@ -65,11 +65,10 @@ public class Task extends SchedulingObject {
             nextTaskID = newNext;
         }
 
-        if (earlyStart <= lateStart)
-        {
             this.earlyStart = earlyStart;
             this.lateStart = lateStart;
-        }
+
+
         //set
         this.calculateDuration();
         this.setParentProjectID(parentID);
@@ -117,11 +116,11 @@ public class Task extends SchedulingObject {
             endDate = newEnd;
         }
         
-        if (earlyStart <= lateStart)
-        {
+
             this.earlyStart = earlyStart;
             this.lateStart = lateStart;
-        }
+
+
         //set
         this.calculateDuration();
         this.setParentProjectID(parentID);
