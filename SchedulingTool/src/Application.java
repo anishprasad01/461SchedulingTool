@@ -103,6 +103,7 @@ public class Application {
 			System.out.println("No users found in system");
 		    System.out.println("What user name would you like to register with");
 			username = input.nextLine();
+
 			System.out.println("Creating user " + username);
 			createUser(username);
 		}
