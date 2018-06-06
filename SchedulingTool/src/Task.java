@@ -26,6 +26,7 @@ public class Task extends SchedulingObject {
     		LocalDate newEnd, int parentID, long earlyStart, long lateStart)
     {
         super(newName);
+
         taskOwner = newOwner;
         //check dates valid
         if (newEnd.isAfter(newStart))
@@ -51,6 +52,7 @@ public class Task extends SchedulingObject {
                 int newPrev, int newNext, long earlyStart, long lateStart)
     {
         super(newName);
+
         taskOwner = newOwner;
         //check dates valid
         if (newEnd.isAfter(newStart))
@@ -64,10 +66,10 @@ public class Task extends SchedulingObject {
             previousTaskID = newPrev;
             nextTaskID = newNext;
         }
-
             this.earlyStart = earlyStart;
             this.lateStart = lateStart;
-
+            setEarlyStart(earlyStart);
+            setLateStart(lateStart);
 
         //set
         this.calculateDuration();
@@ -80,6 +82,7 @@ public class Task extends SchedulingObject {
                 int newPrev, int newNext, long earlyStart, long lateStart)
     {
         super(newName, id);
+
         taskOwner = newOwner;
         //check dates valid
         if (newEnd.isAfter(newStart))
@@ -94,11 +97,9 @@ public class Task extends SchedulingObject {
             nextTaskID = newNext;
         }
 
-        if (earlyStart <= lateStart)
-        {
+
             this.earlyStart = earlyStart;
             this.lateStart = lateStart;
-        }
         //set
         this.calculateDuration();
         this.setParentProjectID(parentID);
@@ -108,6 +109,7 @@ public class Task extends SchedulingObject {
     		LocalDate newEnd, int parentID, long earlyStart, long lateStart)
     {
         super(newName, id);
+
         taskOwner = newOwner;
         //check dates valid
         if (newEnd.isAfter(newStart))
@@ -130,6 +132,7 @@ public class Task extends SchedulingObject {
     		LocalDate newEnd, int parentID)
     {
         super(newName);
+
         taskOwner = newOwner;
         //check dates valid
         if (newEnd.isAfter(newStart))
@@ -154,6 +157,7 @@ public class Task extends SchedulingObject {
                 int newPrev, int newNext)
     {
         super(newName);
+
         taskOwner = newOwner;
         //check dates valid
         if (newEnd.isAfter(newStart))
@@ -184,6 +188,7 @@ public class Task extends SchedulingObject {
                 int newPrev, int newNext)
     {
         super(newName, id);
+
         taskOwner = newOwner;
         //check dates valid
         if (newEnd.isAfter(newStart))
@@ -212,6 +217,7 @@ public class Task extends SchedulingObject {
     		LocalDate newEnd, int parentID)
     {
         super(newName, id);
+
         taskOwner = newOwner;
         //check dates valid
         if (newEnd.isAfter(newStart))

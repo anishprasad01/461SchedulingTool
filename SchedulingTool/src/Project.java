@@ -201,11 +201,8 @@ public class Project extends SchedulingObject {
 		}
 		else{
 			//return late finish - early finish of this activity
-            System.out.println(taskList.get(getTaskIndexByName(currentActivity)).getLateFinish());
 
-			System.out.println(taskList.get(getTaskIndexByName(currentActivity)).getEarlyFinish());
-
-			return (taskList.get(getTaskIndexByName(currentActivity)).getLateFinish() - taskList.get(getTaskIndexByName(currentActivity)).getEarlyFinish());
+			return (taskList.get(getTaskIndexByName(currentActivity.trim())).getLateFinish() - taskList.get(getTaskIndexByName(currentActivity.trim())).getEarlyFinish());
 
 		}
 	}

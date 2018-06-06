@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -95,6 +96,7 @@ public class Application {
 	private static void login() {
 		Scanner input = new Scanner(System.in);
 		int count = 5;
+		int iterator = 0;
 		String username ="";
 		if(users.isEmpty()) {
 			System.out.println("No users found in system");
@@ -337,6 +339,7 @@ public class Application {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter the name of the project this task will belong to");
 		String taskProject = input.nextLine();
+		int counter = 0;
 		long es = 0;
 		long ls = 0;
 
@@ -347,17 +350,99 @@ public class Application {
 		}
 		
 		System.out.println("Enter the name of the task");
-		String taskName = input.nextLine();
+		String taskName = "";
+		String taskOwner ="";
+		String sDate="";
+
+		while(!checkStringIsValid(taskName)) {
+		if(counter != 0){
+			System.out.println("Something went wrong, name can not be empty");
+			System.out.println("Enter the name of the task");
+
+		}
+			 taskName = input.nextLine();
+		     counter++;
+		}
+		counter = 0;
+
 		System.out.println("Enter the name of the task owner");
-		String taskOwner = input.nextLine();
+
+		while(!checkStringIsValid(taskOwner)) {
+			if(counter != 0){
+				System.out.println("Something went wrong, name can not be empty");
+				System.out.println("Enter the name of the task owner");
+
+			}
+			taskOwner = input.nextLine();
+			counter++;
+		}
+		counter = 0;
 		System.out.println("Please enter the start date in the format YYYY-MM-DD");
-		String sDate = input.nextLine();
-		LocalDate startDate = LocalDate.parse(sDate);
+
+		boolean isSet = false;
+		LocalDate startDate = LocalDate.MIN;
+		LocalDate endDate = LocalDate.MIN;
+
+		while(!checkStringIsValid(sDate) && isSet == false) {
+			if(counter != 0){
+				System.out.println("Something went wrong, date can not be empty or incorrect");
+				System.out.println("Enter the start date in the format YYYY-MM-DD");
+
+			}
+			sDate = input.nextLine();
+			counter++;
+			try {
+				startDate = LocalDate.parse(sDate);
+
+				isSet = true;
+			} catch (Exception e) {
+				System.out.println("Inserted incorrect date, check date again");
+                isSet = false;
+			}
+
+		}
+		counter = 0;
+
+
+
+				isSet = false;
 		System.out.println("Please enter the end date in the format YYYY-MM-DD");
-		String eDate = input.nextLine();
-		LocalDate endDate = LocalDate.parse(eDate);
+		String eDate = "";
+
+		while(!checkStringIsValid(eDate) && isSet == false) {
+			if(counter != 0){
+				System.out.println("Something went wrong, date can not be empty or incorrect");
+				System.out.println("Enter end date in the format YYYY-MM-DD");
+
+			}
+			eDate = input.nextLine();
+			counter++;
+			try {
+				startDate = LocalDate.parse(eDate);
+
+				isSet = true;
+			} catch (Exception e) {
+				System.out.println("Inserted incorrect date, check date again");
+				isSet = false;
+
+
+			}
+			System.out.println("Something went wrong, name of previous task can not be empty");
+			System.out.println("Enter the name of the task");
+
+		}
+		prevTask = input.nextLine();
+
+	}
+		counter = 0;
+
 		System.out.println("Enter the name of the previous task, or 0 if not applicable.");
-		String prevTask = input.nextLine();
+		String prevTask ="";
+		while(!checkStringIsValid(prevTask)) {
+			if(counter != 0){
+				counter++;
+		}
+	    counter = 0;
 		Task prevTemp = null;
 		int prevID = 0;
 		
@@ -366,36 +451,61 @@ public class Application {
 		}
 		else {
 			prevTemp = projects.get(taskProject).getTaskByName(prevTask);
-			prevID = prevTemp.getID();
-
+			if(prevTemp != null) {
+				prevID = prevTemp.getID();
+			}
 		}
 		if(projects.get(taskProject) != null && projects.get(taskProject).getTaskList().size() == 0) {
 			System.out.println("Enter an early start value");
-			 es = input.nextLong();
+			while(es < 0) {
+				try {
+					es = input.nextLong();
+				} catch (Exception e) {
+					System.out.println("Your early start input is invalid");
+					System.out.println("Enter an early start value");
+
+				}
+			}
 			System.out.println("Enter a late start value");
-			 ls = input.nextLong();
-			
- 			if(projects.containsKey(taskProject) ) {
+			while(ls < 0) {
+				try {
+					ls = input.nextLong();
+				} catch (Exception e) {
+					System.out.println("Your late start input is invalid");
+					System.out.println("Enter an late start value");
+
+				}
+			}
+			if(projects.containsKey(taskProject) ) {
 				Project tempProject = projects.get(taskProject);
 				int parentID = tempProject.getID();
 				Task toAdd = new Task(taskName, taskOwner, startDate, endDate, parentID,
 						prevID, 0, es, ls);
+				toAdd.setEarlyStart(es);
+				toAdd.setLateStart(ls);
 				//prevTemp.setNextTaskID(tempProject.getID());
 				toAdd.calculateDuration();
 				tempProject.getTaskList().add(toAdd);
 			}
 		}
 		else {
-			if(projects.containsKey(taskProject) ) {
-				Project tempProject = projects.get(taskProject);
-				int parentID = tempProject.getID();
-				//     public Task(String newName, String newOwner, LocalDate newStart,
-				//    		LocalDate newEnd, int parentID,
-				//                int newPrev, int newNext, long earlyStart, long lateStart)
-				Task toAdd = new Task(taskName, taskOwner, startDate, endDate, parentID, prevID, 0);
-				prevTemp.setNextTaskID(tempProject.getID());
-				toAdd.calculateDuration();
-				tempProject.getTaskList().add(toAdd);
+			try {
+				if (!projects.containsKey(taskProject)) {
+					Project tempProject = projects.get(taskProject);
+					int parentID = tempProject.getID();
+					//     public Task(String newName, String newOwner, LocalDate newStart,
+					//    		LocalDate newEnd, int parentID,
+					//                int newPrev, int newNext, long earlyStart, long lateStart)
+					Task toAdd = new Task(taskName, taskOwner, startDate, endDate, parentID, prevID, 0, es, ls);
+					prevTemp.setNextTaskID(tempProject.getID());
+					toAdd.setEarlyStart(es);
+					toAdd.setLateStart(ls);
+					toAdd.calculateDuration();
+					tempProject.getTaskList().add(toAdd);
+				}
+			}
+			catch (Exception e){
+				System.out.println("Something went wrong, going to main menu");
 			}
 		}
 		System.out.println("Task created");
@@ -510,7 +620,7 @@ public class Application {
 			}
             String next = input.nextLine();
 
-            System.out.println("Free float = " + project.getFreeFloat(current, next));
+            System.out.println("Free float = " + (project.getTaskByName(next).getEarlyStart() - project.getTaskByName(current).getEarlyFinish()));
 
         }
 
@@ -522,7 +632,8 @@ public class Application {
 					System.out.println(project.getTaskList().get(i));
 				}
 				String current = input.nextLine();
-				System.out.println("Total float = " + project.getTotalFloat(current));
+
+				System.out.println("Total float = " + (project.getTaskByName(current).getLateStart() - project.getTaskByName(current).getEarlyStart()));
 			}
 			catch (Exception e){
 				System.out.println("Something went wrong, most likely activity is not found.");
