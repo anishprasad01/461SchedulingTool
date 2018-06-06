@@ -631,7 +631,7 @@ public class Application {
 	
 	public static void performCalculations() {
 
-	    int Operation = 0;
+	    //int Operation = 0;
 	    float input1 = 0;
 	    float input2 = 0;
 	    Scanner input = new Scanner(System.in);
@@ -645,61 +645,27 @@ public class Application {
 
 	    input2 = input.nextFloat();
 
-	    System.out.println("Please enter operation value");
+	    System.out.println("Do you want to calculate free float or total float? Enter f or t");
+        String operation = input.nextLine();
 
-        System.out.println("1: addition");
-        System.out.println("2: subtraction");
-        System.out.println("3: division");
-        System.out.println("4: multiplication");
-	    System.out.println("5: remainder");
-        System.out.println("6: power");
-        System.out.println("");
-        Operation = input.nextInt();
+        if (operation == "f") {
 
-        if (Operation == 1) {
+            System.out.println("Enter the name of the current activity.");
+            String current = input.nextLine();
 
-            System.out.println("Result is: " + (input1 + input2));
+            System.out.println("Enter the name of the next activity.");
+            String next = input.nextLine();
+
+            System.out.println("Free float = " + getFreeFloat(current, next));
 
         }
 
-       else if (Operation == 2) {
+       else if (operation == "t") {
 
-            System.out.println("Result is: " + (input1 - input2));
-
+			System.out.println("Enter the name of the current activity.");
+			String current = input.nextLine();
+            System.out.println("Total float = " + getTotalFloat(current));
         }
-
-      else  if (Operation == 3) {
-
-            System.out.println("Result is: " + (input1 / input2));
-
-        }
-
-       else if (Operation == 4) {
-
-            System.out.println("Result is: " + (input1 * input2));
-
-        }
-        else if (Operation == 5) {
-
-            System.out.println("Result is: " + (input1 % input2));
-
-        }
-        else if (Operation == 6) {
-
-            System.out.println("Result is: " + (  Math.pow(input1,input2)));
-        }
-
-
-        else{
-
-            System.out.println("Invalid Choice: " + Operation);
-
-            System.out.println("Invalid Operation, please enter +,-,*,/,% or ^");
-
-
-
-        }
-
 
     }
   static boolean checkStringIsValid(String Input){
