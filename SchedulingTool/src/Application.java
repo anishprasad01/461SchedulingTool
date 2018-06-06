@@ -648,6 +648,10 @@ public class Application {
 	    System.out.println("Do you want to calculate free float or total float? Enter f or t");
         String operation = input.nextLine();
 
+        System.out.println("Enter the name of the project");
+        String project = input.nextLine();
+        Project project = projects.get(project);
+
         if (operation == "f") {
 
             System.out.println("Enter the name of the current activity.");
@@ -656,7 +660,7 @@ public class Application {
             System.out.println("Enter the name of the next activity.");
             String next = input.nextLine();
 
-            System.out.println("Free float = " + getFreeFloat(current, next));
+            System.out.println("Free float = " + project.getFreeFloat(current, next));
 
         }
 
@@ -664,7 +668,7 @@ public class Application {
 
 			System.out.println("Enter the name of the current activity.");
 			String current = input.nextLine();
-            System.out.println("Total float = " + getTotalFloat(current));
+            System.out.println("Total float = " + project.getTotalFloat(current));
         }
 
     }
