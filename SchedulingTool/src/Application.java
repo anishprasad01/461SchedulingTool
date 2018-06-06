@@ -1,6 +1,3 @@
-import com.sun.deploy.util.StringUtils;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -649,8 +646,8 @@ public class Application {
         String operation = input.nextLine();
 
         System.out.println("Enter the name of the project");
-        String project = input.nextLine();
-        Project project = projects.get(project);
+        String projectString = input.nextLine();
+        Project project = projects.get(projectString);
 
         if (operation == "f") {
 
