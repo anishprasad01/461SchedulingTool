@@ -12,17 +12,17 @@ import java.io.*;
 
 
 /**
- * Scheduling Tool's Driver File
+ * This is the Team Unknown Scheduling Tool's main class.
+ * See README.md for more information.
+ * @authors Anish Prasad, Rahil Mehta, Hossam Basiony
  */
 public class Application {
-	//private static File file;
-	//private static String username;
 	private static User currentUser; // stores the information of the user currently logged in
 	private static HashMap<String, User> users = new HashMap<String, User>(); //stores user objects, access by string
 	private static HashMap<String, Project> projects = new HashMap<String, Project>(); // stores project, access by string
 
-	public Application(/*String inputUsername*/) {
-		//this.username = inputUsername;
+	public Application() {
+
 	}
 
 
@@ -221,7 +221,6 @@ public class Application {
 			}
 		}
 		writer.close();
-		//file.close();
 	}
 
 	//check if file exists, if not it creates one
