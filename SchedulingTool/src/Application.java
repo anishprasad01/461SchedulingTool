@@ -311,8 +311,8 @@ public class Application {
 		System.out.println("Enter the name of the project this task will belong to");
 		String taskProject = input.nextLine();
 		int counter = 0;
-		long es = 0;
-		long ls = 0;
+		long es = -1;
+		long ls = -1;
 
 
 		if (!projects.containsKey(taskProject)) {
@@ -370,6 +370,7 @@ public class Application {
 			} catch (Exception e) {
 				System.out.println("Inserted incorrect date, check date again");
 				isSet = false;
+				sDate = "";
 			}
 
 		}
@@ -382,21 +383,24 @@ public class Application {
 
 		while (!checkStringIsValid(eDate) && isSet == false) {
 			if (counter != 0) {
-				System.out.println("Something went wrong, date can not be empty or incorrect");
+				System.out.println("Something went wrong, date can not be empty or incorrect. Also End Date needs to be after Start Date.");
 				System.out.println("Enter end date in the format YYYY-MM-DD");
 
 			}
 			eDate = input.nextLine();
 			counter++;
 			try {
-				startDate = LocalDate.parse(eDate);
-
-				isSet = true;
+				endDate = LocalDate.parse(eDate);
+				if(endDate.isAfter(startDate)) {
+					isSet = true;
+				}else{
+					eDate = "";
+					isSet = false;
+				}
 			} catch (Exception e) {
 				System.out.println("Inserted incorrect date, check date again");
 				isSet = false;
-
-
+				eDate = "";
 			}
 
 		}
@@ -421,7 +425,12 @@ public class Application {
         }
 
 		if (projects.get(taskProject) != null && projects.get(taskProject).getTaskList().size() == 0) {
+
 			System.out.println("Enter an early start value");
+			es = input.nextLong();
+			System.out.println("Enter a late start value");
+			ls = input.nextLong();
+
 			while (es < 0) {
 				try {
 					es = input.nextLong();
@@ -448,10 +457,7 @@ public class Application {
 			 }
 		}
 		if (projects.get(taskProject).getTaskList().size() == 0) {
-			System.out.println("Enter an early start value");
-			 es = input.nextLong();
-			System.out.println("Enter a late start value");
-			 ls = input.nextLong();
+
 
 			if (projects.containsKey(taskProject)) {
 				Project tempProject = projects.get(taskProject);
