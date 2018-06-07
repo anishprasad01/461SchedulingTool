@@ -10,16 +10,21 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import java.io.*;
 
+
+/**
+ * Scheduling Tool's Driver File
+ */
 public class Application {
 	//private static File file;
 	//private static String username;
-	private static User currentUser;
+	private static User currentUser; // stores the information of the user currently logged in
 	private static HashMap<String, User> users = new HashMap<String, User>(); //stores user objects, access by string
 	private static HashMap<String, Project> projects = new HashMap<String, Project>(); // stores project, access by string
 
 	public Application(/*String inputUsername*/) {
 		//this.username = inputUsername;
 	}
+
 
 	public static void main(String[] args) throws IOException {
 		Scanner input = new Scanner(System.in);
@@ -29,6 +34,7 @@ public class Application {
 
 		System.out.println("Here are your options:");
 
+		// Application presents options to the user
 		boolean quit = false;
 		while (!quit) {
 
@@ -94,6 +100,10 @@ public class Application {
 	}
 
 
+	/**
+	 * This method handles the user login. If no users exist in the system, it will give the user the ability to register.
+	 * Otherwise, it will give the user five tries to log in with a user in the system.
+	 */
 	private static void login() {
 		Scanner input = new Scanner(System.in);
 		int count = 5;
@@ -133,6 +143,12 @@ public class Application {
 		}
 	}
 
+	/**
+	 * This method processes the user's function choice and handles invalid input.
+	 * The user is given a list of choices and five tries to make a valid choice.
+	 * @param input The Scanner retrieving data from the user
+	 * @return An integer representing the user's input
+	 */
 	private static int getUserFunctionChoice(Scanner input) {
 		int choice = -1;
 		int count = 5;
@@ -179,6 +195,11 @@ public class Application {
 //			return false;
 //		}
 //	}
+
+	/**
+	 * This method saves to file the current list of projects, their tasks and users
+	 * @throws IOException if the saving process fails due to IO problems
+	 */
 	private static void saveToFile() throws IOException {
 		File file = new File("projectData.csv");
 		if (!file.exists()) {
@@ -203,6 +224,7 @@ public class Application {
 		//file.close();
 	}
 
+	//check if file exists, if not it creates one
 	private static void createFile(File file) throws IOException {
 		if (file.createNewFile()) {
 			System.out.println("File is created!");
@@ -211,6 +233,7 @@ public class Application {
 		}
 	}
 
+	//restores from file
 	private static void restoreFromFile() throws FileNotFoundException {
 		File file = new File("projectData.csv");
 		// If the file does not exist, create it
